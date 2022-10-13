@@ -36,6 +36,13 @@ proguard/
 # Android Studio captures folder
 captures/
 
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
@@ -83,3 +90,5 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+
