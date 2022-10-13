@@ -1,4 +1,4 @@
-class BitcoinPortfolio {
+class MockBitcoinPortfolio {
     var amount: Double = 0.0 // Should be BigDecimal = BigDecimal("0.0")
         private set
     var averagePrice: Double = 0.0

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Bitcoin Hold</string>
+
+    <!-- Login -->
     <string name="login_error_logging">Erro ao tentar logar conta</string>
+    <string name="login_user_not_found">Usuário não encontrado</string>
 </resources>
