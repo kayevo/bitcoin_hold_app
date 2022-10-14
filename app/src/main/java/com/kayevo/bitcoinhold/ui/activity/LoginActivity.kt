@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityLoginBinding
-import com.kayevo.bitcoinhold.model.result.LoginResult
+import com.kayevo.bitcoinhold.ui.result.LoginResult
 import com.kayevo.bitcoinhold.ui.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +20,22 @@ class LoginActivity : AppCompatActivity() {
         setContentView(loginView.root)
         setListeners()
         setObservers()
+    }
+
+    private fun setListeners() {
+        with(loginView) {
+            btnLogin.setOnClickListener {
+                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+            }
+            txtRegisterAccount.setOnClickListener{
+                goToRegister()
+            }
+        }
+    }
+
+    private fun goToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setObservers() {
@@ -48,19 +64,5 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun setListeners() {
-        with(loginView) {
-            btnLogin.setOnClickListener {
-                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
-            }
-            txtRegisterAccount.setOnClickListener{
-                goToRegister()
-            }
-        }
-    }
 
-    private fun goToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
-    }
 }

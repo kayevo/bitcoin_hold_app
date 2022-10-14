@@ -1,4 +1,4 @@
-package com.kayevo.bitcoinhold.model.result
+package com.kayevo.bitcoinhold.ui.result
 
 import com.kayevo.bitcoinhold.model.User
 

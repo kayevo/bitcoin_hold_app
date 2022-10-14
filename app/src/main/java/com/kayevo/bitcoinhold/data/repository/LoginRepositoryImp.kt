@@ -1,31 +1,31 @@
 package com.kayevo.bitcoinhold.data.repository
 
-import com.kayevo.bitcoinhold.data.result.LoginRepositoryResult
-import com.kayevo.bitcoinhold.data.service.LoginService
+import com.kayevo.bitcoinhold.data.result.LoginRepoResult
+import com.kayevo.bitcoinhold.data.service.UserService
 import com.kayevo.bitcoinhold.model.User
 
 class LoginRepositoryImp(
-    private val loginService: LoginService
+    private val userService: UserService
 ) : LoginRepository {
 
-    override suspend fun login(email: String, password: String): LoginRepositoryResult {
+    override suspend fun login(email: String, password: String): LoginRepoResult {
         return try {
-            val loginResponse = loginService.login(email, password)
+            val loginResponse = userService.login(email, password)
 
             return when (val responseCode = loginResponse.code()){
                 200 ->{
                     loginResponse.body()?.let { user ->
-                        LoginRepositoryResult.Success(user)
+                        LoginRepoResult.Success(User(user))
                     }?: run{
-                        LoginRepositoryResult.ErrorServer
+                        LoginRepoResult.ErrorServer
                     }
                 }
                 else ->{
-                    LoginRepositoryResult.Error(responseCode)
+                    LoginRepoResult.Error(responseCode)
                 }
             }
         }catch (e: Exception){
-            LoginRepositoryResult.ErrorServer
+            LoginRepoResult.ErrorServer
         }
     }
 }

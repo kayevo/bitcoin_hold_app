@@ -4,4 +4,7 @@
     <!-- Login -->
     <string name="login_error_logging">Erro ao tentar logar conta</string>
     <string name="login_user_not_found">Usuário não encontrado</string>
+
+    <!-- Register -->
+    <string name="register_error_register">Erro ao registrar conta</string>
 </resources>

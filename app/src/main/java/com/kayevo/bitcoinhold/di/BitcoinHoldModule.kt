@@ -2,9 +2,12 @@ package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.repository.LoginRepository
-import com.kayevo.bitcoinhold.data.repository.MockLoginRepository
-import com.kayevo.bitcoinhold.data.service.LoginService
+import com.kayevo.bitcoinhold.data.repository.MockLoginRepositoryImp
+import com.kayevo.bitcoinhold.data.repository.MockRegisterRepositoryImp
+import com.kayevo.bitcoinhold.data.repository.RegisterRepository
+import com.kayevo.bitcoinhold.data.service.UserService
 import com.kayevo.bitcoinhold.ui.viewmodel.LoginViewModel
+import com.kayevo.bitcoinhold.ui.viewmodel.RegisterViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -26,19 +29,25 @@ val retrofitModule = module {
 }
 
 val serviceModule = module {
-    single<LoginService> {
-        get<Retrofit>().create(LoginService::class.java)
+    single<UserService> {
+        get<Retrofit>().create(UserService::class.java)
     }
 }
 
 val repositoryModule = module {
     single<LoginRepository> {
-        MockLoginRepository(get<LoginService>())
+        MockLoginRepositoryImp(get<UserService>())
+    }
+    single<RegisterRepository> {
+        MockRegisterRepositoryImp(get<UserService>())
     }
 }
 
 val viewModelModule = module {
     viewModel<LoginViewModel> {
         LoginViewModel(get<LoginRepository>())
+    }
+    viewModel<RegisterViewModel> {
+        RegisterViewModel(get<RegisterRepository>())
     }
 }
