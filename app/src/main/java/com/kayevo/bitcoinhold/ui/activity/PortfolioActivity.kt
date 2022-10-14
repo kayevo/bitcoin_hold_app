@@ -12,6 +12,7 @@ class PortfolioActivity : AppCompatActivity() {
     companion object{
         const val KEY_USER_ID = "USER_ID"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         portfolioView = ActivityPortfolioBinding.inflate(layoutInflater)

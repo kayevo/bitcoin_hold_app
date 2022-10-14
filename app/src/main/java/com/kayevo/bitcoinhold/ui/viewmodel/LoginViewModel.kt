@@ -4,18 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kayevo.bitcoinhold.data.repository.LoginRepository
 import com.kayevo.bitcoinhold.data.repository.MockLoginRepository
 import com.kayevo.bitcoinhold.data.result.LoginRepositoryResult
 import com.kayevo.bitcoinhold.model.result.LoginResult
 import kotlinx.coroutines.launch
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModel(
+    private val repository: LoginRepository
+) : ViewModel() {
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> get() = _loginResult
-    private val mockRepository = MockLoginRepository()
+
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            when(val loginResult = mockRepository.login(email, password)){
+            when(val loginResult = repository.login(email, password)){
                 is LoginRepositoryResult.Success ->{
                     _loginResult.postValue(LoginResult.Success(loginResult.user))
                 }

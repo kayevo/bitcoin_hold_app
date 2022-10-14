@@ -26,31 +26,41 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResult.observe(this) { result ->
             when (result) {
                 is LoginResult.Success -> {
-                    val intent = Intent(this, PortfolioActivity::class.java)
-                    intent.putExtra(PortfolioActivity.KEY_USER_ID, result.user.id)
-                    startActivity(intent)
+                    goToPortfolio(result.user.id)
                 }
                 is LoginResult.NotFound -> {
-                    Toast.makeText(
-                        this, this.getString(R.string.login_user_not_found),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showMessage(this.getString(R.string.login_user_not_found))
                 }
                 else -> {
-                    Toast.makeText(
-                        this, this.getString(R.string.login_error_logging),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showMessage(this.getString(R.string.login_error_logging))
                 }
             }
         }
     }
 
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goToPortfolio(userId: String) {
+        val intent = Intent(this, PortfolioActivity::class.java)
+        intent.putExtra(PortfolioActivity.KEY_USER_ID, userId)
+        startActivity(intent)
+    }
+
     private fun setListeners() {
-        loginView.btnLogin.setOnClickListener {
-            with(loginView){
+        with(loginView) {
+            btnLogin.setOnClickListener {
                 loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
             }
+            txtRegisterAccount.setOnClickListener{
+                goToRegister()
+            }
         }
+    }
+
+    private fun goToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 }
