@@ -1,10 +1,7 @@
 package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
-import com.kayevo.bitcoinhold.data.repository.LoginRepository
-import com.kayevo.bitcoinhold.data.repository.MockLoginRepositoryImp
-import com.kayevo.bitcoinhold.data.repository.MockRegisterRepositoryImp
-import com.kayevo.bitcoinhold.data.repository.RegisterRepository
+import com.kayevo.bitcoinhold.data.repository.*
 import com.kayevo.bitcoinhold.data.service.UserService
 import com.kayevo.bitcoinhold.ui.viewmodel.LoginViewModel
 import com.kayevo.bitcoinhold.ui.viewmodel.RegisterViewModel
@@ -14,12 +11,18 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val retrofitModule = module {
     single<Retrofit> {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+        val client = OkHttpClient.Builder().addInterceptor(interceptor)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .build()
+
         Retrofit.Builder()
             .baseUrl(BuildConfig.BITCOIN_HOLD_BASE_URL)
             .client(client)
@@ -30,24 +33,24 @@ val retrofitModule = module {
 
 val serviceModule = module {
     single<UserService> {
-        get<Retrofit>().create(UserService::class.java)
+        get<Retrofit>().create(UserService::class.java) as UserService
     }
 }
 
 val repositoryModule = module {
     single<LoginRepository> {
-        MockLoginRepositoryImp(get<UserService>())
+        LoginRepositoryImp(get<UserService>()) as LoginRepository
     }
     single<RegisterRepository> {
-        MockRegisterRepositoryImp(get<UserService>())
+        RegisterRepositoryImp(get<UserService>()) as RegisterRepository
     }
 }
 
 val viewModelModule = module {
     viewModel<LoginViewModel> {
-        LoginViewModel(get<LoginRepository>())
+        LoginViewModel(get<LoginRepository>()) as LoginViewModel
     }
     viewModel<RegisterViewModel> {
-        RegisterViewModel(get<RegisterRepository>())
+        RegisterViewModel(get<RegisterRepository>()) as RegisterViewModel
     }
 }

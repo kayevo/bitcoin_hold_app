@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kayevo.bitcoinhold.data.repository.LoginRepository
 import com.kayevo.bitcoinhold.data.result.LoginRepoResult
+import com.kayevo.bitcoinhold.model.Credential
 import com.kayevo.bitcoinhold.ui.result.LoginResult
 import kotlinx.coroutines.launch
 
@@ -17,9 +18,10 @@ class LoginViewModel(
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            when(val loginResult = repository.login(email, password)){
+            val credentials = Credential(email, password)
+            when(val loginResponse = repository.login(credentials)){
                 is LoginRepoResult.Success ->{
-                    _loginResult.postValue(LoginResult.Success(loginResult.user))
+                    _loginResult.postValue(LoginResult.Success(loginResponse.userId))
                 }
                 is LoginRepoResult.NotFound ->{
                     _loginResult.postValue(LoginResult.NotFound)

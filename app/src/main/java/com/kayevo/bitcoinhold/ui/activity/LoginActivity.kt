@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResult.observe(this) { result ->
             when (result) {
                 is LoginResult.Success -> {
-                    goToPortfolio(result.user.id)
+                    goToPortfolio(result.userId)
                 }
                 is LoginResult.NotFound -> {
                     showMessage(this.getString(R.string.login_user_not_found))

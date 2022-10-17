@@ -7,4 +7,5 @@
 
     <!-- Register -->
     <string name="register_error_register">Erro ao registrar conta</string>
+    <string name="register_registered_email">Este e-mail já foi utilizado</string>
 </resources>
