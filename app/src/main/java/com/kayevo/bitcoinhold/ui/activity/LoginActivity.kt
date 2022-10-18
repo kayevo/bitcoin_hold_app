@@ -20,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(loginView.root)
         setListeners()
         setObservers()
+        goToPortfolio("634eaa97b0c2603a9691dcaa")
     }
 
     private fun setListeners() {
@@ -42,10 +43,11 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResult.observe(this) { result ->
             when (result) {
                 is LoginResult.Success -> {
+                    showMessage(this.getString(R.string.login_success_logging))
                     goToPortfolio(result.userId)
                 }
                 is LoginResult.NotFound -> {
-                    showMessage(this.getString(R.string.login_user_not_found))
+                    showMessage(this.getString(R.string.login_error_not_found_user))
                 }
                 else -> {
                     showMessage(this.getString(R.string.login_error_logging))

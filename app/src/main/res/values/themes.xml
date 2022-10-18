@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.BitcoinHold" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/primary_dark_blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/green</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
 
@@ -19,6 +19,11 @@
 
         <!-- Background -->
         <item name="android:windowBackground">@color/primary_dark_blue</item>
+
+        <!-- Edit Text-->
+        <!--this changes the filled colour of the MDC Filled EditText-->
+        <!--this also changes the color of the hint font and helper text too-->
+        <item name="colorOnSurface">@color/green</item>
     </style>
 
     <!-- Buttons -->
@@ -28,5 +33,12 @@
         <item name="backgroundTint">@color/green</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/primary_dark_blue</item>
+    </style>
+
+    <!-- Button portfolio menu -->
+    <style name="PortfolioMenuButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">10sp</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
 </resources>

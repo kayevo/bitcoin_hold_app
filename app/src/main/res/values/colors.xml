@@ -7,11 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <!-- Theme -->
     <color name="primary_dark_blue">#29313C</color>
     <color name="secondary_dark_blue">#1F262F</color>
     <color name="primary_light_blue">#343E4A</color>
     <color name="gray">#C6D1D6</color>
+    <color name="gray_transparent">#80C6D1D6</color>
     <color name="green">#1AC481</color>
 </resources>

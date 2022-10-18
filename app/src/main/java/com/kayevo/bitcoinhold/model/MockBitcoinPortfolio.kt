@@ -9,6 +9,17 @@ class MockBitcoinPortfolio {
         averagePrice = (averagePrice + payedPrice) / amount
     }
 
+    /* Javascript
+    (averagePrice + payedPrice) / amountInBitcoin = averagePrice
+    (100000 + 100000) / 2 = 100000
+
+    (averagePrice + payedPrice) / amountInSatoshi = averagePrice
+    (100000 + 100000) / 200000000 = 0,001
+
+    (averagePrice + payedPrice) / amountInSatoshi = averagePrice
+    paserBitcoinToSatoshi( (100000 + 100000) / 200000000 ) = 100000
+    */
+
     fun removeFunds(funds: Double){
         amount -= funds
         if (amount == 0.0){

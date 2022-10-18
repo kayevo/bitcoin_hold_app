@@ -3,9 +3,14 @@
 
     <!-- Login -->
     <string name="login_error_logging">Erro ao tentar logar conta</string>
-    <string name="login_user_not_found">Usuário não encontrado</string>
+    <string name="login_error_not_found_user">Usuário não encontrado</string>
+    <string name="login_success_logging">Login realizado</string>
 
     <!-- Register -->
-    <string name="register_error_register">Erro ao registrar conta</string>
+    <string name="register_error_registering">Erro ao cadastrar conta</string>
     <string name="register_registered_email">Este e-mail já foi utilizado</string>
+    <string name="register_success_registering">Conta cadastrada com sucesso</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio_error_get_portfolio">Erro ao carregar portifólio</string>
 </resources>

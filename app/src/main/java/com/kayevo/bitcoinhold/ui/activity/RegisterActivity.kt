@@ -36,11 +36,14 @@ class RegisterActivity : AppCompatActivity() {
             registerViewModel.registerResult.observe(this@RegisterActivity) { result ->
                 when (result) {
                     is RegisterResult.Success -> {
+                        showMessage(
+                            this@RegisterActivity.getString(R.string.register_success_registering)
+                        )
                         goToLogin()
                     }
                     else -> {
                         showMessage(
-                            this@RegisterActivity.getString(R.string.register_error_register)
+                            this@RegisterActivity.getString(R.string.register_error_registering)
                         )
                     }
                 }
@@ -59,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                     else -> {
                         showMessage(
-                            this@RegisterActivity.getString(R.string.register_error_register)
+                            this@RegisterActivity.getString(R.string.register_error_registering)
                         )
                     }
                 }
@@ -68,8 +71,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
         finish()
     }
 

@@ -2,8 +2,10 @@ package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.repository.*
+import com.kayevo.bitcoinhold.data.service.PortfolioService
 import com.kayevo.bitcoinhold.data.service.UserService
 import com.kayevo.bitcoinhold.ui.viewmodel.LoginViewModel
+import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
 import com.kayevo.bitcoinhold.ui.viewmodel.RegisterViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,6 +37,9 @@ val serviceModule = module {
     single<UserService> {
         get<Retrofit>().create(UserService::class.java) as UserService
     }
+    single<PortfolioService> {
+        get<Retrofit>().create(PortfolioService::class.java) as PortfolioService
+    }
 }
 
 val repositoryModule = module {
@@ -44,6 +49,9 @@ val repositoryModule = module {
     single<RegisterRepository> {
         RegisterRepositoryImp(get<UserService>()) as RegisterRepository
     }
+    single<PortfolioRepository> {
+        MockPortfolioRepositoryImp(get<PortfolioService>()) as PortfolioRepository
+    }
 }
 
 val viewModelModule = module {
@@ -52,5 +60,9 @@ val viewModelModule = module {
     }
     viewModel<RegisterViewModel> {
         RegisterViewModel(get<RegisterRepository>()) as RegisterViewModel
+    }
+
+    viewModel<PortfolioViewModel> {
+        PortfolioViewModel(get<PortfolioRepository>()) as PortfolioViewModel
     }
 }
