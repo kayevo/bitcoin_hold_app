@@ -10,7 +10,22 @@
     <string name="register_error_registering">Erro ao cadastrar conta</string>
     <string name="register_registered_email">Este e-mail já foi utilizado</string>
     <string name="register_success_registering">Conta cadastrada com sucesso</string>
+    <string name="register_invalid_form">Email ou senha inválidos</string>
 
     <!-- Portfolio -->
-    <string name="portfolio_error_get_portfolio">Erro ao carregar portifólio</string>
+    <string name="portfolio_error_get_portfolio">Erro ao carregar portfólio</string>
+    <string name="portfolio_error_get_portfolio_analysis">Erro ao carregar análises do portfólio</string>
+
+    <!-- Add funds -->
+    <string name="add_funds_error_to_add">Erro ao adicionar fundos</string>
+    <string name="add_funds_invalid_form">Valores inválidos</string>
+
+    <!-- Remove funds -->
+    <string name="remove_funds_error_to_remove">Erro ao remover fundos</string>
+    <string name="remove_funds_insufficient_funds">Saldo insuficiente</string>
+    <string name="remove_funds_invalid_form">Valores inválidos</string>
+
+    <!-- Customize funds -->
+    <string name="customize_funds_error_to_customize">Erro ao customizar valores do portfólio</string>
+    <string name="customize_funds_invalid_form">Valores inválidos</string>
 </resources>

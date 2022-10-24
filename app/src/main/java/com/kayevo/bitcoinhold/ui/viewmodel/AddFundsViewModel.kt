@@ -4,32 +4,45 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.repository.LoginRepository
-import com.kayevo.bitcoinhold.data.result.LoginRepoResult
-import com.kayevo.bitcoinhold.model.Credential
-import com.kayevo.bitcoinhold.ui.result.LoginResult
+import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
+import com.kayevo.bitcoinhold.data.helper.parseCurrencyToDouble
+import com.kayevo.bitcoinhold.data.repository.AddFundsRepository
+import com.kayevo.bitcoinhold.data.result.AddFundsRepoResult
+import com.kayevo.bitcoinhold.model.Portfolio
+import com.kayevo.bitcoinhold.ui.result.AddFundsResult
 import kotlinx.coroutines.launch
 
 class AddFundsViewModel(
-    private val repository: LoginRepository
+    private val repository: AddFundsRepository
 ) : ViewModel() {
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> get() = _loginResult
+    private val _addFundsResult = MutableLiveData<AddFundsResult>()
+    val addFundsResult: LiveData<AddFundsResult> get() = _addFundsResult
 
-    fun login(email: String, password: String) {
+    fun removeFunds(userId: String, bitcoinAmount: String, bitcoinAveragePrice: String) {
         viewModelScope.launch {
-            val credentials = Credential(email, password)
-            when(val loginResponse = repository.login(credentials)){
-                is LoginRepoResult.Success ->{
-                    _loginResult.postValue(LoginResult.Success(loginResponse.userId))
+            val portfolio = PortfolioEntity(
+                Portfolio(bitcoinAmount, bitcoinAveragePrice)
+            )
+
+            when (repository.addFunds(
+                userId,
+                portfolio.satoshiAmount,
+                portfolio.bitcoinAveragePrice
+            )) {
+                is AddFundsRepoResult.Success -> {
+                    _addFundsResult.postValue(AddFundsResult.Success)
                 }
-                is LoginRepoResult.NotFound ->{
-                    _loginResult.postValue(LoginResult.NotFound)
-                }
-                else->{
-                    _loginResult.postValue(LoginResult.Error)
+                else -> {
+                    _addFundsResult.postValue(AddFundsResult.Error)
                 }
             }
         }
+    }
+
+    fun isValidForm(bitcoinAmount: String, price: String): Boolean {
+        val bitcoinAmountNum = bitcoinAmount.parseCurrencyToDouble()
+        val priceNum = price.parseCurrencyToDouble()
+        return (bitcoinAmount.isNotEmpty() && price.isNotEmpty())
+                && !(bitcoinAmountNum == 0.0 && priceNum != 0.0)
     }
 }

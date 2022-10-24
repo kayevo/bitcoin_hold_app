@@ -1,6 +1,5 @@
 package com.kayevo.bitcoinhold.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +25,15 @@ class RegisterActivity : AppCompatActivity() {
     private fun setListeners() {
         with(registerView) {
             btnRegister.setOnClickListener {
-                registerViewModel.registeredEmail(txtEmail.text.toString())
+                val email = txtEmail.text.toString()
+                val password = txtPassword.text.toString()
+                if (registerViewModel.isValidForm(email, password)) {
+                    registerViewModel.registeredEmail(txtEmail.text.toString())
+                } else {
+                    showMessage(
+                        this@RegisterActivity.getString(R.string.register_invalid_form)
+                    )
+                }
             }
         }
     }

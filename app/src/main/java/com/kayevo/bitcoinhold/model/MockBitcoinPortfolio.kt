@@ -17,7 +17,7 @@ class MockBitcoinPortfolio {
     (100000 + 100000) / 200000000 = 0,001
 
     (averagePrice + payedPrice) / amountInSatoshi = averagePrice
-    paserBitcoinToSatoshi( (100000 + 100000) / 200000000 ) = 100000
+    parseBitcoinToSatoshi( (100000 + 100000) / 200000000 ) = 100000
     */
 
     fun removeFunds(funds: Double){

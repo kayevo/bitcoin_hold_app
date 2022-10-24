@@ -24,30 +24,34 @@ class RegisterViewModel(
         viewModelScope.launch {
             val credentials = Credential(email, password)
 
-            when(repository.register(credentials)){
-                is RegisterRepoResult.Success ->{
+            when (repository.register(credentials)) {
+                is RegisterRepoResult.Success -> {
                     _registerResult.postValue(RegisterResult.Success)
                 }
-                else->{
+                else -> {
                     _registerResult.postValue(RegisterResult.Error)
                 }
             }
         }
     }
 
-    fun registeredEmail(email: String){
+    fun registeredEmail(email: String) {
         viewModelScope.launch {
-            when(repository.registeredEmail(email)){
-                is RegisteredEmailResult.NotRegisteredEmail ->{
+            when (repository.registeredEmail(email)) {
+                is RegisteredEmailResult.NotRegisteredEmail -> {
                     _registeredEmailResult.postValue(RegisteredEmailResult.NotRegisteredEmail)
                 }
-                is RegisteredEmailResult.RegisteredEmail ->{
+                is RegisteredEmailResult.RegisteredEmail -> {
                     _registeredEmailResult.postValue(RegisteredEmailResult.RegisteredEmail)
                 }
-                else->{
+                else -> {
                     _registeredEmailResult.postValue(RegisteredEmailResult.ErrorServer)
                 }
             }
         }
+    }
+
+    fun isValidForm(email: String, password: String) : Boolean {
+        return email.isNotEmpty() && password.isNotEmpty()
     }
 }

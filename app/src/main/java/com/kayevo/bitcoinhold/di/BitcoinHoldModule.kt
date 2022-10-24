@@ -2,11 +2,10 @@ package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.repository.*
+import com.kayevo.bitcoinhold.data.service.BitcoinPriceService
 import com.kayevo.bitcoinhold.data.service.PortfolioService
 import com.kayevo.bitcoinhold.data.service.UserService
-import com.kayevo.bitcoinhold.ui.viewmodel.LoginViewModel
-import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
-import com.kayevo.bitcoinhold.ui.viewmodel.RegisterViewModel
+import com.kayevo.bitcoinhold.ui.viewmodel.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -40,6 +39,9 @@ val serviceModule = module {
     single<PortfolioService> {
         get<Retrofit>().create(PortfolioService::class.java) as PortfolioService
     }
+    single<BitcoinPriceService> {
+        get<Retrofit>().create(BitcoinPriceService::class.java) as BitcoinPriceService
+    }
 }
 
 val repositoryModule = module {
@@ -50,7 +52,19 @@ val repositoryModule = module {
         RegisterRepositoryImp(get<UserService>()) as RegisterRepository
     }
     single<PortfolioRepository> {
-        MockPortfolioRepositoryImp(get<PortfolioService>()) as PortfolioRepository
+        PortfolioRepositoryImp(get<PortfolioService>()) as PortfolioRepository
+    }
+    single<AddFundsRepository> {
+        AddFundsRepositoryImp(get<PortfolioService>()) as AddFundsRepository
+    }
+    single<RemoveFundsRepository> {
+        RemoveFundsRepositoryImp(get<PortfolioService>()) as RemoveFundsRepository
+    }
+    single<BitcoinPriceRepository> {
+        BitcoinPriceRepositoryImp(get<BitcoinPriceService>()) as BitcoinPriceRepository
+    }
+    single<CustomizeFundsRepository> {
+        CustomizeFundsRepositoryImp(get<PortfolioService>()) as CustomizeFundsRepository
     }
 }
 
@@ -61,8 +75,19 @@ val viewModelModule = module {
     viewModel<RegisterViewModel> {
         RegisterViewModel(get<RegisterRepository>()) as RegisterViewModel
     }
-
     viewModel<PortfolioViewModel> {
-        PortfolioViewModel(get<PortfolioRepository>()) as PortfolioViewModel
+        PortfolioViewModel(
+            get<PortfolioRepository>(),
+            get<BitcoinPriceRepository>()
+        ) as PortfolioViewModel
+    }
+    viewModel<AddFundsViewModel> {
+        AddFundsViewModel(get<AddFundsRepository>()) as AddFundsViewModel
+    }
+    viewModel<RemoveFundsViewModel> {
+        RemoveFundsViewModel(get<RemoveFundsRepository>()) as RemoveFundsViewModel
+    }
+    viewModel<CustomizeFundsViewModel> {
+        CustomizeFundsViewModel(get<CustomizeFundsRepository>()) as CustomizeFundsViewModel
     }
 }

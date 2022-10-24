@@ -20,13 +20,13 @@ class LoginActivity : AppCompatActivity() {
         setContentView(loginView.root)
         setListeners()
         setObservers()
-        goToPortfolio("634eaa97b0c2603a9691dcaa")
     }
 
     private fun setListeners() {
         with(loginView) {
             btnLogin.setOnClickListener {
-                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+                goToPortfolio("635070a1eba514cd45e2f685") // TODO remove it
+            // loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
             }
             txtRegisterAccount.setOnClickListener{
                 goToRegister()

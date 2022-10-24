@@ -6,14 +6,14 @@
     android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/backgroundMenu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/menu_background_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,36 +21,42 @@
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/backgroundMenu"
+        app:layout_constraintTop_toTopOf="@+id/backgroundMenu"
         app:srcCompat="@drawable/ic_settings" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddBitcoin"
+        android:id="@+id/btnAddFunds"
         style="@style/PortfolioMenuButton"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginStart="10dp"
-        android:text="Adicionar bitcoin"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toEndOf="@+id/btnSettings"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="5dp"
         android:drawableLeft="@drawable/ic_add"
-        />
+        android:focusable="false"
+        android:text="Adicionar bitcoin"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+        app:layout_constraintEnd_toStartOf="@+id/btnRemoveFunds"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSettings"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRemoveBitcoin"
+        android:id="@+id/btnRemoveFunds"
         style="@style/PortfolioMenuButton"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Remover bitcoin"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toEndOf="@+id/btnAddBitcoin"
-        app:layout_constraintTop_toTopOf="parent"
         android:drawableLeft="@drawable/ic_remove"
-        />
-
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:focusable="false"
+        android:text="Remover bitcoin"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundMenu"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnAddFunds"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

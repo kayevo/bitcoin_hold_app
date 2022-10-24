@@ -30,7 +30,6 @@ class PortfolioRepositoryImp(
                     PortfolioRepoResult.Error(responseCode)
                 }
             }
-            PortfolioRepoResult.ErrorServer
         } catch (e: Exception) {
             PortfolioRepoResult.ErrorServer
         }

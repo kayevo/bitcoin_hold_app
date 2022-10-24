@@ -17,7 +17,9 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "BITCOIN_HOLD_BASE_URL", "\"https://bitcoin-hold-server.onrender.com/\""
-        buildConfigField "String", "BITCOIN_HOLD_LOCAL_BASE_URL", "\"http://localhost:8080/\""
+        buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", "\"https://min-api.cryptocompare.com/\""
+        buildConfigField "String", "CRYPTOCOMPARE_PRICE_URL", "\"https://min-api.cryptocompare.com/data/price\""
+        buildConfigField "String", "CRYPTOCOMPARE_API_KEY", "\"58831e7eba1c6ee66a89e3eca256f9a9953b43e63de6c63aa9a3133d2cf1f4e6\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +51,8 @@ dependencies {
     def mockk_version = "1.12.3"
     def android_arch_version = "2.1.0"
     def coroutines_version = "1.6.4"
+    def glide_version = "4.13.2"
+    def picasso_version = "2.8"
 
     //noinspection GradleDependency
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -93,4 +97,11 @@ dependencies {
 
     // MockK
     testImplementation "io.mockk:mockk:$mockk_version"
+
+    // Glide (glide have support to insert gifs on image views)
+    // images downloaded from: https://giphy.com/stickers/
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
 }

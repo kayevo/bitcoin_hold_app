@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SettingsActivity"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_light_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnTurnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back" />
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+            app:layout_constraintStart_toEndOf="@+id/btnCustomizeFunds"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableLeft="@drawable/ic_logout"
+            android:focusable="false"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDonation"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Doações"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+            app:layout_constraintStart_toEndOf="@+id/btnCustomizeFunds"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableLeft="@drawable/ic_money"
+            android:focusable="false"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCustomizeFunds"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customizar saldos do portfólio"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+            app:layout_constraintStart_toEndOf="@+id/btnCustomizeFunds"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableLeft="@drawable/ic_arrow_alteration"
+            android:focusable="false"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

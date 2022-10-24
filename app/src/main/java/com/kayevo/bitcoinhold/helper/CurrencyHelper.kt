@@ -10,6 +10,22 @@ fun Long.parseSatoshiToBitcoin(): String {
     return "%.${8}f".format((this / 10.0.pow(8.0)))
 }
 
+fun Double.parseSatoshiToBitcoin(): String {
+    return "%.${8}f".format((this / 10.0.pow(8.0)))
+}
+
+fun Double.parseBitcoinPriceToSatoshiPrice(): Double{
+    return (this * 100.0).toLong().parseSatoshiToBitcoin().toDouble() / 100.0
+}
+
+fun String.parseBitcoinToSatoshi(): Long {
+    return (this.toDouble() * 10.0.pow(8.0)).toLong()
+}
+
+fun String.parseCurrencyToDouble(): Double {
+    return this.replace(",", "").toDoubleOrNull() ?: 0.0
+}
+
 fun Double.parseToCurrency(): String {
     val numFormat = NumberFormat.getCurrencyInstance() as DecimalFormat
     val formatSymbols: DecimalFormatSymbols = numFormat.decimalFormatSymbols
@@ -18,6 +34,12 @@ fun Double.parseToCurrency(): String {
     numFormat.decimalFormatSymbols = formatSymbols
 
     return numFormat.format(this).trim()
+}
+
+fun Double.parseToPercentage(): String {
+    val percentageSymbol = if(this >= 0) "+" else ""
+
+    return "$percentageSymbol ${this.parseToCurrency()} %"
 }
 
 fun Double.parseToBRLCurrency(): String {

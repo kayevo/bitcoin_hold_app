@@ -11,7 +11,7 @@ class MockPortfolioRepositoryImp(
     override suspend fun getPortfolio(userId: String): PortfolioRepoResult {
         return PortfolioRepoResult.Success(
             PortfolioEntity(
-                "634eaa97b0c2603a9691dcaa", 10000,
+                10000,
                 100000.0
             )
         )
