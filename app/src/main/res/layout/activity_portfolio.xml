@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.PortfolioActivity"
     android:background="@drawable/background_shape"
+    android:id="@+id/portfolioActivity"
     >
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/portfolio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/portfolio"
         android:visibility="gone"
-        tools:visibility="visible"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/textView5"
@@ -169,6 +174,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/portfolioLoading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone">
 
         <include

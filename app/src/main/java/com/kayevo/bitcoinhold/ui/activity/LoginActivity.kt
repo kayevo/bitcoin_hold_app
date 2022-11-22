@@ -20,15 +20,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(loginView.root)
         setListeners()
         setObservers()
+        goToAds()
     }
 
     private fun setListeners() {
         with(loginView) {
             btnLogin.setOnClickListener {
-                goToPortfolio("635070a1eba514cd45e2f685") // TODO remove it
-            // loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
             }
-            txtRegisterAccount.setOnClickListener{
+            txtRegisterAccount.setOnClickListener {
                 goToRegister()
             }
         }
@@ -66,5 +66,9 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun goToAds() {
+        val intent = Intent(this, AdsActivity::class.java)
+        startActivity(intent)
+    }
 
 }

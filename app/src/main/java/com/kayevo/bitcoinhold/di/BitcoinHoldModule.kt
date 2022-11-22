@@ -2,6 +2,7 @@ package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.repository.*
+import com.kayevo.bitcoinhold.data.service.AdsService
 import com.kayevo.bitcoinhold.data.service.BitcoinPriceService
 import com.kayevo.bitcoinhold.data.service.PortfolioService
 import com.kayevo.bitcoinhold.data.service.UserService
@@ -42,6 +43,9 @@ val serviceModule = module {
     single<BitcoinPriceService> {
         get<Retrofit>().create(BitcoinPriceService::class.java) as BitcoinPriceService
     }
+    single<AdsService> {
+        get<Retrofit>().create(AdsService::class.java) as AdsService
+    }
 }
 
 val repositoryModule = module {
@@ -65,6 +69,9 @@ val repositoryModule = module {
     }
     single<CustomizeFundsRepository> {
         CustomizeFundsRepositoryImp(get<PortfolioService>()) as CustomizeFundsRepository
+    }
+    single<AdsRepository> {
+        AdsRepositoryImp(get<AdsService>()) as AdsRepository
     }
 }
 
@@ -90,4 +97,8 @@ val viewModelModule = module {
     viewModel<CustomizeFundsViewModel> {
         CustomizeFundsViewModel(get<CustomizeFundsRepository>()) as CustomizeFundsViewModel
     }
+    viewModel<AdsViewModel> {
+        AdsViewModel(get<AdsRepository>()) as AdsViewModel
+    }
+
 }

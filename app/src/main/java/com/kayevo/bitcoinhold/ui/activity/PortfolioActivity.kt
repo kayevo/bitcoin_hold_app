@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityPortfolioBinding
 import com.kayevo.bitcoinhold.model.Portfolio
@@ -15,7 +16,6 @@ import com.kayevo.bitcoinhold.ui.fragment.RemoveFundsFragment
 import com.kayevo.bitcoinhold.ui.result.PortfolioAnalysisResult
 import com.kayevo.bitcoinhold.ui.result.PortfolioResult
 import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
-import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -24,7 +24,6 @@ class PortfolioActivity : AppCompatActivity() {
     private val portfolioViewModel by viewModel<PortfolioViewModel>()
     private var addFundsModal: AddFundsFragment? = null
     private var removeFundsModal: RemoveFundsFragment? = null
-
 
     companion object {
         const val KEY_USER_ID = "USER_ID"
@@ -36,52 +35,59 @@ class PortfolioActivity : AppCompatActivity() {
         setContentView(portfolioView.root)
 
         showLoading()
-    }
 
-    override fun onResume() {
-        super.onResume()
         intent.getStringExtra(KEY_USER_ID)?.let { userId ->
+            setListeners(userId)
+            setObservers()
+
             getPortfolio(userId)
-            setObservers(userId)
         }
     }
 
     private fun showLoading() {
-        Glide.with(this).load(R.drawable.loading_gif).into(portfolioView.loading.imgLoading)
+        val options: RequestOptions = RequestOptions()
+            .centerCrop()
+            .placeholder(R.drawable.menu_background_shape)
+            .error(R.color.green)
+
+        Glide.with(this).load(R.drawable.loading_gif).apply(options).into(
+            portfolioView.loading.imgLoading
+        )
     }
 
     private fun getPortfolio(userId: String) {
         portfolioViewModel.getPortfolio(userId)
     }
 
-    private fun setObservers(userId: String) {
+    private fun setObservers() {
         portfolioViewModel.portfolioResult.observe(this) { result ->
             when (result) {
                 is PortfolioResult.Success -> {
                     showPortfolio(result.portfolio)
                     getPortfolioAnalysis(result.portfolio)
-                    setListeners(userId)
                 }
                 else -> {
                     showMessage(this.getString(R.string.portfolio_error_get_portfolio))
+                    goToLogin()
                 }
             }
         }
 
-        portfolioViewModel.portfolioAnalysisResult.observe(this){result ->
-            when(result){
-                is PortfolioAnalysisResult.Success ->{
+        portfolioViewModel.portfolioAnalysisResult.observe(this) { result ->
+            when (result) {
+                is PortfolioAnalysisResult.Success -> {
                     showPortfolioAnalysis(result.portfolioAnalysis)
-                    removeLoadingScreen()
+                    removeLoading()
                 }
-                else->{
+                else -> {
                     showMessage(this.getString(R.string.portfolio_error_get_portfolio_analysis))
+                    goToLogin()
                 }
             }
         }
     }
 
-    private fun removeLoadingScreen() {
+    private fun removeLoading() {
         with(portfolioView) {
             portfolio.visibility = View.VISIBLE
             portfolioLoading.visibility = View.GONE
@@ -123,6 +129,10 @@ class PortfolioActivity : AppCompatActivity() {
                 goToSettings(userId)
             }
         }
+    }
+
+    private fun goToLogin() {
+        finish()
     }
 
     private fun goToSettings(userId: String) {

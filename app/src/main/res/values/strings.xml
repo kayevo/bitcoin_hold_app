@@ -28,4 +28,7 @@
     <!-- Customize funds -->
     <string name="customize_funds_error_to_customize">Erro ao customizar valores do portfólio</string>
     <string name="customize_funds_invalid_form">Valores inválidos</string>
+
+    <!-- Ads -->
+    <string name="ads_error_get_ads">Erro ao carregar anúncio</string>
 </resources>

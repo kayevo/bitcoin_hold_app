@@ -13,8 +13,10 @@
         <entry key="app/src/main/res/drawable/ic_remove.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/menu_background_shape.xml" value="0.3" />
         <entry key="app/src/main/res/layout-v26/item_menu.xml" value="0.29739583333333336" />
+        <entry key="app/src/main/res/layout/activity_ads.xml" value="0.29739583333333336" />
         <entry key="app/src/main/res/layout/activity_donation.xml" value="0.48409405255878285" />
         <entry key="app/src/main/res/layout/activity_donations.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_launch_ads.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_portfolio.xml" value="0.2572463768115942" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.33" />

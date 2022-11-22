@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface UserService {
 
-    @GET("user")
+    @GET("user/auth")
     suspend fun login(
         @Query("email") email: String,
         @Query("password") password: String

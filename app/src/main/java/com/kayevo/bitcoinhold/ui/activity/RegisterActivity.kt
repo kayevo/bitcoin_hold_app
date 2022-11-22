@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityRegisterBinding
+import com.kayevo.bitcoinhold.helper.NotificationHelper
 import com.kayevo.bitcoinhold.ui.result.RegisterResult
 import com.kayevo.bitcoinhold.ui.result.RegisteredEmailResult
 import com.kayevo.bitcoinhold.ui.viewmodel.RegisterViewModel
@@ -43,6 +44,7 @@ class RegisterActivity : AppCompatActivity() {
             registerViewModel.registerResult.observe(this@RegisterActivity) { result ->
                 when (result) {
                     is RegisterResult.Success -> {
+                        showNotification()
                         showMessage(
                             this@RegisterActivity.getString(R.string.register_success_registering)
                         )
@@ -65,7 +67,9 @@ class RegisterActivity : AppCompatActivity() {
                             .register(txtEmail.text.toString(), txtPassword.text.toString())
                     }
                     is RegisteredEmailResult.RegisteredEmail -> {
+                        showMessage(
                         this@RegisterActivity.getString(R.string.register_registered_email)
+                        )
                     }
                     else -> {
                         showMessage(
@@ -75,6 +79,14 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showNotification() {
+        NotificationHelper.createSampleDataNotificationAndOpenLogin(
+            this@RegisterActivity, "Você foi registrado",
+            "Usuário registrado com sucesso no app da Bitcoin Hold",
+            "Usuário registrado com sucesso"
+        )
     }
 
     private fun goToLogin() {
