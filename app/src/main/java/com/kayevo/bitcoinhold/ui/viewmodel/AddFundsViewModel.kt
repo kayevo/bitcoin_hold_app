@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
-import com.kayevo.bitcoinhold.data.helper.parseCurrencyToDouble
+import com.kayevo.bitcoinhold.helper.parseCurrencyToDouble
 import com.kayevo.bitcoinhold.data.repository.AddFundsRepository
 import com.kayevo.bitcoinhold.data.result.AddFundsRepoResult
 import com.kayevo.bitcoinhold.model.Portfolio

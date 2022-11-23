@@ -2,6 +2,7 @@ package com.kayevo.bitcoinhold.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -76,6 +77,7 @@ class PortfolioActivity : AppCompatActivity() {
         portfolioViewModel.portfolioAnalysisResult.observe(this) { result ->
             when (result) {
                 is PortfolioAnalysisResult.Success -> {
+
                     showPortfolioAnalysis(result.portfolioAnalysis)
                     removeLoading()
                 }

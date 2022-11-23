@@ -4,12 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.helper.parseBitcoinToSatoshi
-import com.kayevo.bitcoinhold.data.helper.parseCurrencyToDouble
+import com.kayevo.bitcoinhold.helper.parseBitcoinToSatoshi
+import com.kayevo.bitcoinhold.helper.parseCurrencyToDouble
 import com.kayevo.bitcoinhold.data.repository.RemoveFundsRepository
-import com.kayevo.bitcoinhold.data.result.AddFundsRepoResult
 import com.kayevo.bitcoinhold.data.result.RemoveFundsRepoResult
-import com.kayevo.bitcoinhold.ui.result.AddFundsResult
 import com.kayevo.bitcoinhold.ui.result.RemoveFundsResult
 import kotlinx.coroutines.launch
 

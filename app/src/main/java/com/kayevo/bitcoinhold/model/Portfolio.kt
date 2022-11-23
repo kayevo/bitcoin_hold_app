@@ -1,8 +1,8 @@
 package com.kayevo.bitcoinhold.model
 
 import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
-import com.kayevo.bitcoinhold.data.helper.parseSatoshiToBitcoin
-import com.kayevo.bitcoinhold.data.helper.parseToCurrency
+import com.kayevo.bitcoinhold.helper.parseSatoshiToBitcoin
+import com.kayevo.bitcoinhold.helper.parseToCurrency
 
 data class Portfolio(
     val bitcoinAmount: String,

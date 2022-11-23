@@ -1,8 +1,8 @@
 package com.kayevo.bitcoinhold.data.entity
 
 import com.google.gson.annotations.SerializedName
-import com.kayevo.bitcoinhold.data.helper.parseBitcoinToSatoshi
-import com.kayevo.bitcoinhold.data.helper.parseCurrencyToDouble
+import com.kayevo.bitcoinhold.helper.parseBitcoinToSatoshi
+import com.kayevo.bitcoinhold.helper.parseCurrencyToDouble
 import com.kayevo.bitcoinhold.model.Portfolio
 
 data class PortfolioEntity(

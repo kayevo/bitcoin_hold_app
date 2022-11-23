@@ -1,9 +1,9 @@
 package com.kayevo.bitcoinhold.model
 
 import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
-import com.kayevo.bitcoinhold.data.helper.parseBitcoinPriceToSatoshiPrice
-import com.kayevo.bitcoinhold.data.helper.parseToCurrency
-import com.kayevo.bitcoinhold.data.helper.parseToPercentage
+import com.kayevo.bitcoinhold.helper.parseBitcoinPriceToSatoshiPrice
+import com.kayevo.bitcoinhold.helper.parseToCurrency
+import com.kayevo.bitcoinhold.helper.parseToPercentage
 
 data class PortfolioAnalysis(
     private val bitcoinPrice: Double,
