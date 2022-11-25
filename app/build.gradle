@@ -16,10 +16,14 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "BITCOIN_HOLD_BASE_URL", "\"https://bitcoin-hold-server.onrender.com/\""
-        buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", "\"https://min-api.cryptocompare.com/\""
-        buildConfigField "String", "CRYPTOCOMPARE_PRICE_URL", "\"https://min-api.cryptocompare.com/data/price\""
-        buildConfigField "String", "CRYPTOCOMPARE_API_KEY", "\"58831e7eba1c6ee66a89e3eca256f9a9953b43e63de6c63aa9a3133d2cf1f4e6\""
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String", "BITCOIN_HOLD_BASE_URL", "\"${properties.getProperty("BITCOIN_HOLD_BASE_URL")}\""
+        buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", "\"${properties.getProperty("CRYPTOCOMPARE_BASE_URL")}\""
+        buildConfigField "String", "CRYPTOCOMPARE_PRICE_URL", "\"${properties.getProperty("CRYPTOCOMPARE_PRICE_URL")}\""
+        buildConfigField "String", "CRYPTOCOMPARE_API_KEY", "\"${properties.getProperty("CRYPTOCOMPARE_API_KEY")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,10 +56,9 @@ dependencies {
     def android_arch_version = "2.1.0"
     def coroutines_version = "1.6.4"
     def glide_version = "4.13.2"
-    def picasso_version = "2.8"
     def okhttp_version = "4.10.0"
 
-    //noinspection GradleDependency
+    // GradleDependency
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
