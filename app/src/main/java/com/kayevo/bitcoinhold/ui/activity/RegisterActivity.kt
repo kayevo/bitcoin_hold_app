@@ -3,6 +3,7 @@ package com.kayevo.bitcoinhold.ui.activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityRegisterBinding
 import com.kayevo.bitcoinhold.helper.NotificationHelper
@@ -29,7 +30,9 @@ class RegisterActivity : AppCompatActivity() {
                 val email = txtEmail.text.toString()
                 val password = txtPassword.text.toString()
                 if (registerViewModel.isValidForm(email, password)) {
-                    registerViewModel.registeredEmail(txtEmail.text.toString())
+                    registerViewModel.registeredEmail(
+                        BuildConfig.BITCOIN_HOLD_API_KEY, txtEmail.text.toString()
+                    )
                 } else {
                     showMessage(
                         this@RegisterActivity.getString(R.string.register_invalid_form)
@@ -64,11 +67,15 @@ class RegisterActivity : AppCompatActivity() {
                 when (registeredEmailResult) {
                     is RegisteredEmailResult.NotRegisteredEmail -> {
                         registerViewModel
-                            .register(txtEmail.text.toString(), txtPassword.text.toString())
+                            .register(
+                                BuildConfig.BITCOIN_HOLD_API_KEY,
+                                txtEmail.text.toString(),
+                                txtPassword.text.toString()
+                            )
                     }
                     is RegisteredEmailResult.RegisteredEmail -> {
                         showMessage(
-                        this@RegisterActivity.getString(R.string.register_registered_email)
+                            this@RegisterActivity.getString(R.string.register_registered_email)
                         )
                     }
                     else -> {

@@ -10,52 +10,49 @@ class RegisterRepositoryImp(
     private val userService: UserService
 ) : RegisterRepository {
 
-    override suspend fun register(credential: Credential): RegisterRepoResult {
+    override suspend fun register(apiKey: String, credential: Credential): RegisterRepoResult {
         return try {
-            val registerResponse = userService.register(credential.email, credential.password)
+            val registerResponse = userService.register(
+                apiKey = apiKey, credential.email, credential.password
+            )
 
-            return when (val responseCode = registerResponse.code()){
-                HttpStatusCodeHelper.Created.code ->{
-                    /*registerResponse.body()?.let { registeredEntity ->
-                        if (registeredEntity.registered) RegisterRepoResult.Success
-                        else RegisterRepoResult.ErrorServer
-
-                    }?: run{
-                        RegisterRepoResult.ErrorServer
-                    }*/
+            return when (val responseCode = registerResponse.code()) {
+                HttpStatusCodeHelper.Created.code -> {
                     RegisterRepoResult.Success
                 }
-                HttpStatusCodeHelper.InternalServerError.code ->{
+                HttpStatusCodeHelper.InternalServerError.code -> {
                     RegisterRepoResult.ErrorServer
                 }
-                else ->{
+                else -> {
                     RegisterRepoResult.Error(responseCode)
                 }
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             RegisterRepoResult.ErrorServer
         }
     }
 
-    override suspend fun registeredEmail(email: String): RegisteredEmailResult{
+    override suspend fun registeredEmail(apiKey: String, email: String): RegisteredEmailResult {
         return try {
-            val registeredEmailResponse = userService.registeredEmail(email)
+            val registeredEmailResponse = userService.registeredEmail(
+                apiKey = apiKey, email = email
+            )
 
-            return when(val responseCode = registeredEmailResponse.code()){
-                HttpStatusCodeHelper.OK.code ->{
+            return when (val responseCode = registeredEmailResponse.code()) {
+                HttpStatusCodeHelper.OK.code -> {
                     RegisteredEmailResult.RegisteredEmail
                 }
-                HttpStatusCodeHelper.NotFound.code ->{
+                HttpStatusCodeHelper.NotFound.code -> {
                     RegisteredEmailResult.NotRegisteredEmail
                 }
-                HttpStatusCodeHelper.InternalServerError.code ->{
+                HttpStatusCodeHelper.InternalServerError.code -> {
                     RegisteredEmailResult.ErrorServer
                 }
-                else ->{
+                else -> {
                     RegisteredEmailResult.Error(responseCode)
                 }
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             RegisteredEmailResult.ErrorServer
         }
     }

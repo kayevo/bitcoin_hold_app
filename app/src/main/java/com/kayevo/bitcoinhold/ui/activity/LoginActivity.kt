@@ -2,9 +2,9 @@ package com.kayevo.bitcoinhold.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityLoginBinding
 import com.kayevo.bitcoinhold.ui.result.LoginResult
@@ -27,7 +27,10 @@ class LoginActivity : AppCompatActivity() {
     private fun setListeners() {
         with(loginView) {
             btnLogin.setOnClickListener {
-                loginViewModel.login(txtEmail.text.toString(), txtPassword.text.toString())
+                loginViewModel.login(
+                    BuildConfig.BITCOIN_HOLD_API_KEY,
+                    txtEmail.text.toString(), txtPassword.text.toString()
+                )
             }
             txtRegisterAccount.setOnClickListener {
                 goToRegister()

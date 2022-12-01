@@ -19,9 +19,9 @@ class AdsViewModel(
     private val _adsResult = MutableLiveData<AdsResult>()
     val adsResult: LiveData<AdsResult> get() = _adsResult
 
-    fun getAds() {
+    fun getAds(apiKey: String) {
         viewModelScope.launch {
-            when(val adsResponse = repository.getAllAds()){
+            when(val adsResponse = repository.getAllAds(apiKey)){
                 is AdsRepoResult.Success ->{
                     var randomGenerator = Random(System.currentTimeMillis())
                     var adsSelected = randomGenerator.nextInt(0, adsResponse.allAds.size)

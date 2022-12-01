@@ -1,5 +1,6 @@
 package com.kayevo.bitcoinhold.data.repository
 
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.helper.HttpStatusCodeHelper
 import com.kayevo.bitcoinhold.data.result.AddFundsRepoResult
 import com.kayevo.bitcoinhold.data.result.AdsRepoResult
@@ -10,9 +11,9 @@ class AdsRepositoryImp(
     private val adsService: AdsService
 ) : AdsRepository {
 
-    override suspend fun getAllAds(): AdsRepoResult {
+    override suspend fun getAllAds(apiKey: String): AdsRepoResult {
         return try {
-            val adsResponse = adsService.getAllAds()
+            val adsResponse = adsService.getAllAds(apiKey)
             when (val responseCode = adsResponse.code()) {
                 HttpStatusCodeHelper.OK.code -> {
                     adsResponse.body()?.let { allAds ->
@@ -33,9 +34,9 @@ class AdsRepositoryImp(
         }
     }
 
-    override suspend fun getAds(email: String): AdsRepoResult {
+    override suspend fun getAds(apiKey: String, email: String): AdsRepoResult {
         return try {
-            val adsResponse = adsService.getAds(email)
+            val adsResponse = adsService.getAds(apiKey, email)
             when (val responseCode = adsResponse.code()) {
                 HttpStatusCodeHelper.OK.code -> {
                     adsResponse.body()?.let { ads ->

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.ActivityPortfolioBinding
 import com.kayevo.bitcoinhold.model.Portfolio
@@ -41,7 +42,7 @@ class PortfolioActivity : AppCompatActivity() {
             setListeners(userId)
             setObservers()
 
-            getPortfolio(userId)
+            getPortfolio(BuildConfig.BITCOIN_HOLD_API_KEY, userId)
         }
     }
 
@@ -56,8 +57,8 @@ class PortfolioActivity : AppCompatActivity() {
         )
     }
 
-    private fun getPortfolio(userId: String) {
-        portfolioViewModel.getPortfolio(userId)
+    private fun getPortfolio(apiKey:String, userId: String) {
+        portfolioViewModel.getPortfolio(apiKey, userId)
     }
 
     private fun setObservers() {
@@ -65,7 +66,7 @@ class PortfolioActivity : AppCompatActivity() {
             when (result) {
                 is PortfolioResult.Success -> {
                     showPortfolio(result.portfolio)
-                    getPortfolioAnalysis(result.portfolio)
+                    getPortfolioAnalysis(BuildConfig.BITCOIN_HOLD_API_KEY, result.portfolio)
                 }
                 else -> {
                     showMessage(this.getString(R.string.portfolio_error_get_portfolio))
@@ -104,8 +105,8 @@ class PortfolioActivity : AppCompatActivity() {
         }
     }
 
-    private fun getPortfolioAnalysis(portfolio: Portfolio) {
-        portfolioViewModel.getPortfolioAnalysis(portfolio)
+    private fun getPortfolioAnalysis(apiKey: String, portfolio: Portfolio) {
+        portfolioViewModel.getPortfolioAnalysis(apiKey, portfolio)
     }
 
     private fun showPortfolio(portfolio: Portfolio) {

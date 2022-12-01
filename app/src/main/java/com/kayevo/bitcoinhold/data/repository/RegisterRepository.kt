@@ -5,6 +5,6 @@ import com.kayevo.bitcoinhold.data.result.RegisterRepoResult
 import com.kayevo.bitcoinhold.model.Credential
 
 interface RegisterRepository {
-    suspend fun register(credential: Credential): RegisterRepoResult
-    suspend fun registeredEmail(email: String): RegisteredEmailResult
+    suspend fun register(apiKey: String, credential: Credential): RegisterRepoResult
+    suspend fun registeredEmail(apiKey: String, email: String): RegisteredEmailResult
 }

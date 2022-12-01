@@ -18,13 +18,19 @@ class CustomizeFundsViewModel(
     private val _customizeFundsResult = MutableLiveData<CustomizeFundsResult>()
     val customizeFundsResult: LiveData<CustomizeFundsResult> get() = _customizeFundsResult
 
-    fun customizeFunds(userId: String, bitcoinAmount: String, bitcoinAveragePrice: String) {
+    fun customizeFunds(
+        apiKey: String,
+        userId: String,
+        bitcoinAmount: String,
+        bitcoinAveragePrice: String
+    ) {
         viewModelScope.launch {
             val portfolio = PortfolioEntity(
                 Portfolio(bitcoinAmount, bitcoinAveragePrice)
             )
 
             when (repository.customizeFunds(
+                apiKey = apiKey,
                 userId,
                 portfolio.satoshiAmount,
                 portfolio.bitcoinAveragePrice

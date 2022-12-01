@@ -21,9 +21,10 @@ android {
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
         buildConfigField "String", "BITCOIN_HOLD_BASE_URL", "\"${properties.getProperty("BITCOIN_HOLD_BASE_URL")}\""
-        buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", "\"${properties.getProperty("CRYPTOCOMPARE_BASE_URL")}\""
-        buildConfigField "String", "CRYPTOCOMPARE_PRICE_URL", "\"${properties.getProperty("CRYPTOCOMPARE_PRICE_URL")}\""
-        buildConfigField "String", "CRYPTOCOMPARE_API_KEY", "\"${properties.getProperty("CRYPTOCOMPARE_API_KEY")}\""
+        buildConfigField "String", "BITCOIN_HOLD_API_KEY", "\"${properties.getProperty("BITCOIN_HOLD_API_KEY")}\""
+        buildConfigField "String", "BITCOIN_INFO_BASE_URL", "\"${properties.getProperty("BITCOIN_INFO_BASE_URL")}\""
+        buildConfigField "String", "BITCOIN_INFO_PRICE_URL", "\"${properties.getProperty("BITCOIN_INFO_PRICE_URL")}\""
+        buildConfigField "String", "BITCOIN_INFO_API_KEY", "\"${properties.getProperty("BITCOIN_INFO_API_KEY")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

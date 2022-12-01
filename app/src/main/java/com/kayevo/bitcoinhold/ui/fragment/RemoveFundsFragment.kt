@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.FragmentRemoveFundsBinding
 import com.kayevo.bitcoinhold.ui.result.AddFundsResult
@@ -46,7 +47,7 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
         viewModel.removeFundsResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is RemoveFundsResult.Success -> {
-                    updatePortfolio()
+                    updatePortfolio(BuildConfig.BITCOIN_HOLD_API_KEY)
                     goToPortfolio()
                 }
                 is RemoveFundsResult.InsufficientFunds -> {
@@ -72,7 +73,7 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
             btnRemoveFunds.setOnClickListener {
                 val bitcoinAmount = txtBitcoinAmount.text.toString()
                 if (viewModel.isValidForm(bitcoinAmount)) {
-                    removeFunds()
+                    removeFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
                 }else{
                     showMessage(
                         this@RemoveFundsFragment.getString(R.string.remove_funds_invalid_form)
@@ -82,10 +83,11 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun removeFunds() {
+    private fun removeFunds(apiKey: String) {
         with(removeFundsView) {
             userId?.let { userId ->
                 viewModel.removeFunds(
+                    apiKey = apiKey,
                     userId,
                     txtBitcoinAmount.text.toString()
                 )
@@ -93,9 +95,9 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun updatePortfolio() {
+    private fun updatePortfolio(apiKey: String) {
         userId?.let { userId ->
-            portfolioViewModel.getPortfolio(userId)
+            portfolioViewModel.getPortfolio(apiKey, userId)
         }
     }
 

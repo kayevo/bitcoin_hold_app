@@ -14,13 +14,13 @@ import retrofit2.Retrofit
 
 class BitcoinPriceRepositoryImp(
     private val bitcoinPriceService: BitcoinPriceService
-) : BitcoinPriceRepository/*, KoinComponent*/ {
-    // private val retrofit: Retrofit by inject()
+) : BitcoinPriceRepository {
 
-    override suspend fun getBitcoinPrice(): BitcoinPriceRepoResult {
+    override suspend fun getBitcoinPrice(apiKey: String): BitcoinPriceRepoResult {
         return try {
             val bitcoinPriceResponse = bitcoinPriceService.getBitcoinPrice(
-                BuildConfig.CRYPTOCOMPARE_PRICE_URL
+                url = "${BuildConfig.BITCOIN_INFO_BASE_URL+BuildConfig.BITCOIN_INFO_PRICE_URL}",
+                apiKey = apiKey
             )
 
             return when (val responseCode = bitcoinPriceResponse.code()){

@@ -5,6 +5,6 @@ import com.kayevo.bitcoinhold.data.result.CustomizeFundsRepoResult
 
 interface CustomizeFundsRepository {
     suspend fun customizeFunds(
-        userId: String, satoshiAmount: Long, bitcoinAveragePrice: Double
+        apiKey: String, userId: String, satoshiAmount: Long, bitcoinAveragePrice: Double
     ): CustomizeFundsRepoResult
 }

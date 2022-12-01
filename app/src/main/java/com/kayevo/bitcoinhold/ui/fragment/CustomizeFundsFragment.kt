@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.FragmentCustomizeFundsBinding
 import com.kayevo.bitcoinhold.ui.activity.PortfolioActivity
@@ -46,7 +47,7 @@ class CustomizeFundsFragment : BottomSheetDialogFragment() {
                 val bitcoinAmount = txtBitcoinAmount.text.toString()
                 val price = txtPrice.text.toString()
                 if (viewModel.isValidForm(bitcoinAmount, price)) {
-                    customizeFunds()
+                    customizeFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
                 } else {
                     showMessage(
                         this@CustomizeFundsFragment.getString(R.string.customize_funds_invalid_form)
@@ -81,10 +82,11 @@ class CustomizeFundsFragment : BottomSheetDialogFragment() {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun customizeFunds() {
+    private fun customizeFunds(apiKey: String) {
         with(customizeFundsView) {
             userId?.let { userId ->
                 viewModel.customizeFunds(
+                    apiKey = apiKey,
                     userId,
                     txtBitcoinAmount.text.toString(),
                     txtPrice.text.toString()

@@ -18,13 +18,14 @@ class AddFundsViewModel(
     private val _addFundsResult = MutableLiveData<AddFundsResult>()
     val addFundsResult: LiveData<AddFundsResult> get() = _addFundsResult
 
-    fun removeFunds(userId: String, bitcoinAmount: String, bitcoinAveragePrice: String) {
+    fun removeFunds(apiKey: String, userId: String, bitcoinAmount: String, bitcoinAveragePrice: String) {
         viewModelScope.launch {
             val portfolio = PortfolioEntity(
                 Portfolio(bitcoinAmount, bitcoinAveragePrice)
             )
 
             when (repository.addFunds(
+                apiKey = apiKey,
                 userId,
                 portfolio.satoshiAmount,
                 portfolio.bitcoinAveragePrice

@@ -20,11 +20,11 @@ class RegisterViewModel(
     private val _registeredEmailResult = MutableLiveData<RegisteredEmailResult>()
     val registeredEmailResult: LiveData<RegisteredEmailResult> get() = _registeredEmailResult
 
-    fun register(email: String, password: String) {
+    fun register(apiKey: String, email: String, password: String) {
         viewModelScope.launch {
             val credentials = Credential(email, password)
 
-            when (repository.register(credentials)) {
+            when (repository.register(apiKey = apiKey, credentials)) {
                 is RegisterRepoResult.Success -> {
                     _registerResult.postValue(RegisterResult.Success)
                 }
@@ -35,9 +35,9 @@ class RegisterViewModel(
         }
     }
 
-    fun registeredEmail(email: String) {
+    fun registeredEmail(apiKey: String, email: String) {
         viewModelScope.launch {
-            when (repository.registeredEmail(email)) {
+            when (repository.registeredEmail(apiKey = apiKey, email)) {
                 is RegisteredEmailResult.NotRegisteredEmail -> {
                     _registeredEmailResult.postValue(RegisteredEmailResult.NotRegisteredEmail)
                 }
@@ -51,7 +51,7 @@ class RegisterViewModel(
         }
     }
 
-    fun isValidForm(email: String, password: String) : Boolean {
+    fun isValidForm(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
     }
 }

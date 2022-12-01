@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.data.entity.AdsEntity
 import com.kayevo.bitcoinhold.databinding.ActivityAdsBinding
@@ -28,7 +29,7 @@ class AdsActivity : AppCompatActivity() {
         setObservers()
         showLoading()
 
-        adsViewModel.getAds()
+        adsViewModel.getAds(BuildConfig.BITCOIN_HOLD_API_KEY)
     }
 
     private fun showLoading() {
@@ -92,7 +93,7 @@ class AdsActivity : AppCompatActivity() {
             adsLoading.visibility = View.GONE
             adsLayout.visibility = View.VISIBLE
         }
-        // picasso.load(ads.posterUrl).into(adsView.imgAds)
+
         val options: RequestOptions = RequestOptions()
             .centerCrop()
             .placeholder(R.drawable.menu_background_shape)

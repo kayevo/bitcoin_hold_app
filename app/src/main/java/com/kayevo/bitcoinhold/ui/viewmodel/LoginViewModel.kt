@@ -16,17 +16,17 @@ class LoginViewModel(
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> get() = _loginResult
 
-    fun login(email: String, password: String) {
+    fun login(apiKey: String, email: String, password: String) {
         viewModelScope.launch {
             val credentials = Credential(email, password)
-            when(val loginResponse = repository.login(credentials)){
-                is LoginRepoResult.Success ->{
+            when (val loginResponse = repository.login(apiKey = apiKey, credentials)) {
+                is LoginRepoResult.Success -> {
                     _loginResult.postValue(LoginResult.Success(loginResponse.userId))
                 }
-                is LoginRepoResult.NotFound ->{
+                is LoginRepoResult.NotFound -> {
                     _loginResult.postValue(LoginResult.NotFound)
                 }
-                else->{
+                else -> {
                     _loginResult.postValue(LoginResult.Error)
                 }
             }

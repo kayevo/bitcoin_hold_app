@@ -1,5 +1,6 @@
 package com.kayevo.bitcoinhold.data.repository
 
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.helper.HttpStatusCodeHelper
 import com.kayevo.bitcoinhold.data.result.PortfolioRepoResult
 import com.kayevo.bitcoinhold.data.service.PortfolioService
@@ -8,9 +9,12 @@ class PortfolioRepositoryImp(
     private val portfolioService: PortfolioService
 ) : PortfolioRepository {
 
-    override suspend fun getPortfolio(userId: String): PortfolioRepoResult {
+    override suspend fun getPortfolio(apiKey: String, userId: String): PortfolioRepoResult {
         return try {
-            val portfolioResponse = portfolioService.getPortfolio(userId)
+            val portfolioResponse = portfolioService.getPortfolio(
+                apiKey = apiKey,
+                userId = userId
+            )
 
             when (val responseCode = portfolioResponse.code()) {
                 HttpStatusCodeHelper.OK.code -> {

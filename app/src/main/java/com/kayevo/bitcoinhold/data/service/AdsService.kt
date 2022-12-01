@@ -8,18 +8,12 @@ import retrofit2.http.*
 interface AdsService {
     @GET("ads")
     suspend fun getAllAds(
+        @Header("api_key") apiKey: String
     ): Response<List<AdsEntity>>
 
     @GET("ads/title")
     suspend fun getAds(
+        @Header("api_key") apiKey: String,
         @Query("title") title: String
     ): Response<AdsEntity>
-
-    // not implemented yet, need a admin user to access ads configuration
-    /*@POST("ads")
-    suspend fun setAds(
-        @Query("title") title: String,
-        @Query("posterUrl") posterUrl: String,
-        @Query("webLink") webLink: String
-    ): Response<Any>*/
 }

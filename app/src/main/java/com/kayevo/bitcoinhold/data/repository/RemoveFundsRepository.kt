@@ -5,6 +5,6 @@ import com.kayevo.bitcoinhold.data.result.RemoveFundsRepoResult
 
 interface RemoveFundsRepository {
     suspend fun removeFunds(
-        userId: String, satoshiAmount: Long
+        apiKey: String, userId: String, satoshiAmount: Long
     ): RemoveFundsRepoResult
 }

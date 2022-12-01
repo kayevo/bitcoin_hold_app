@@ -5,6 +5,6 @@ import com.kayevo.bitcoinhold.data.result.AdsRepoResult
 import retrofit2.http.Query
 
 interface AdsRepository {
-    suspend fun getAllAds(): AdsRepoResult
-    suspend fun getAds(email: String): AdsRepoResult
+    suspend fun getAllAds(apiKey: String): AdsRepoResult
+    suspend fun getAds(apiKey: String, email: String): AdsRepoResult
 }

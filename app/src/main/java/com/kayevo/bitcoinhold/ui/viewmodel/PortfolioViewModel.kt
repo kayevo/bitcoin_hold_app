@@ -25,9 +25,10 @@ class PortfolioViewModel(
     private val _portfolioAnalysisResult = MutableLiveData<PortfolioAnalysisResult>()
     val portfolioAnalysisResult: LiveData<PortfolioAnalysisResult> get() = _portfolioAnalysisResult
 
-    fun getPortfolio(userId: String) {
+    fun getPortfolio(apiKey: String, userId: String) {
         viewModelScope.launch {
-            when (val portfolioResponse = portfolioRepository.getPortfolio(userId)) {
+            when (val portfolioResponse =
+                portfolioRepository.getPortfolio(apiKey = apiKey, userId)) {
                 is PortfolioRepoResult.Success -> {
                     _portfolioResult.postValue(
                         PortfolioResult.Success(Portfolio(portfolioResponse.portfolio))
@@ -40,9 +41,9 @@ class PortfolioViewModel(
         }
     }
 
-    fun getPortfolioAnalysis(portfolio: Portfolio) {
+    fun getPortfolioAnalysis(apiKey: String, portfolio: Portfolio) {
         viewModelScope.launch {
-            when (val bitcoinPriceResponse = bitcoinPriceRepository.getBitcoinPrice()) {
+            when (val bitcoinPriceResponse = bitcoinPriceRepository.getBitcoinPrice(apiKey)) {
                 is BitcoinPriceRepoResult.Success -> {
                     val portfolioEntity = PortfolioEntity(portfolio)
                     val portfolioAnalysis = PortfolioAnalysis(

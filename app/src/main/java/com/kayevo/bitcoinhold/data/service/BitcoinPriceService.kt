@@ -13,6 +13,6 @@ interface BitcoinPriceService {
         @Url url: String,
         @Query("fsym") cryptoSymbol: String = "BTC",
         @Query("tsyms") fiatSymbol: String = "BRL",
-        @Query("api_key") apiKey: String = BuildConfig.CRYPTOCOMPARE_API_KEY,
+        @Query("api_key") apiKey: String,
     ): Response<BitcoinPriceEntity>
 }

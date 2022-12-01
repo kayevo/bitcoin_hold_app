@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
 import com.kayevo.bitcoinhold.databinding.FragmentAddFundsBinding
 import com.kayevo.bitcoinhold.ui.result.AddFundsResult
@@ -43,7 +44,7 @@ class AddFundsFragment : BottomSheetDialogFragment() {
         viewModel.addFundsResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is AddFundsResult.Success -> {
-                    updatePortfolio()
+                    updatePortfolio(BuildConfig.BITCOIN_HOLD_API_KEY)
                     goToPortfolio()
                 }
                 else -> {
@@ -67,7 +68,7 @@ class AddFundsFragment : BottomSheetDialogFragment() {
                 val bitcoinAmount = txtBitcoinAmount.text.toString()
                 val price = txtPrice.text.toString()
                 if (viewModel.isValidForm(bitcoinAmount, price)) {
-                    addFunds()
+                    addFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
                 }else{
                     showMessage(this@AddFundsFragment.getString(R.string.add_funds_invalid_form))
                 }
@@ -75,10 +76,11 @@ class AddFundsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun addFunds() {
+    private fun addFunds(apiKey: String) {
         with(addFundView) {
             userId?.let { userId ->
                 viewModel.removeFunds(
+                    apiKey,
                     userId,
                     txtBitcoinAmount.text.toString(),
                     txtPrice.text.toString()
@@ -87,9 +89,9 @@ class AddFundsFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun updatePortfolio() {
+    private fun updatePortfolio(apiKey: String) {
         userId?.let { userId ->
-            portfolioViewModel.getPortfolio(userId)
+            portfolioViewModel.getPortfolio(apiKey, userId)
         }
     }
 
