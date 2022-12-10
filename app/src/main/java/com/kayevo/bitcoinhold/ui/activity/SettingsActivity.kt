@@ -42,6 +42,9 @@ class SettingsActivity : AppCompatActivity() {
             btnCustomizeFunds.setOnClickListener {
                 goToCustomizeFunds(userId)
             }
+            btnSupport.setOnClickListener {
+                goToActivity(SupportActivity::class.java)
+            }
         }
     }
 
@@ -64,6 +67,16 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun goToDonation() {
         val intent = Intent(this@SettingsActivity, DonationActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goToSupport() {
+        val intent = Intent(this@SettingsActivity, SupportActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun <T> goToActivity(className: Class<T>){
+        val intent = Intent(this@SettingsActivity, className)
         startActivity(intent)
     }
 }

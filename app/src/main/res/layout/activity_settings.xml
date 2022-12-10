@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.SettingsActivity"
+    tools:context=".ui.activity.SupportActivity"
     >
 
     <androidx.appcompat.widget.Toolbar
@@ -75,5 +75,17 @@
             android:focusable="false"
             />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSupport"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suporte"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundMenu"
+            app:layout_constraintStart_toEndOf="@+id/btnCustomizeFunds"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableLeft="@drawable/ic_support"
+            android:focusable="false"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
