@@ -19,7 +19,7 @@ class BitcoinPriceRepositoryImp(
     override suspend fun getBitcoinPrice(apiKey: String): BitcoinPriceRepoResult {
         return try {
             val bitcoinPriceResponse = bitcoinPriceService.getBitcoinPrice(
-                url = "${BuildConfig.BITCOIN_INFO_BASE_URL+BuildConfig.BITCOIN_INFO_PRICE_URL}",
+                url = "${BuildConfig.BITCOIN_INFO_BASE_URL+"data/price"}",
                 apiKey = apiKey
             )
 
