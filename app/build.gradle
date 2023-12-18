@@ -12,10 +12,10 @@ android {
 
     defaultConfig {
         applicationId "com.kayevo.bitcoinhold"
-        minSdk 26
+        minSdk 21
         targetSdk 33
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 4
+        versionName "2.0.1"
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
@@ -28,6 +28,7 @@ android {
         buildConfigField "String", "SUPPORT_EMAIL", "\"${properties.getProperty("SUPPORT_EMAIL")}\""
         buildConfigField "String", "BITCOIN_ADDRESS", "\"${properties.getProperty("BITCOIN_ADDRESS")}\""
         buildConfigField "String", "BITCOIN_LN_ADDRESS", "\"${properties.getProperty("BITCOIN_LN_ADDRESS")}\""
+        buildConfigField "String", "MOCK_USER_ID", "\"${properties.getProperty("MOCK_USER_ID")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

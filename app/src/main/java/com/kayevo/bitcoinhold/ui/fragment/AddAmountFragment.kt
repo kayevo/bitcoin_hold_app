@@ -8,18 +8,18 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
-import com.kayevo.bitcoinhold.databinding.FragmentAddFundsBinding
-import com.kayevo.bitcoinhold.ui.result.AddFundsResult
-import com.kayevo.bitcoinhold.ui.viewmodel.AddFundsViewModel
+import com.kayevo.bitcoinhold.databinding.FragmentAddAmountBinding
+import com.kayevo.bitcoinhold.ui.result.AddAmountResult
+import com.kayevo.bitcoinhold.ui.viewmodel.AddAmountViewModel
 import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddFundsFragment : BottomSheetDialogFragment() {
+class AddAmountFragment : BottomSheetDialogFragment() {
     private var userId: String? = null
-    private var _addFundView: FragmentAddFundsBinding? = null
+    private var _addFundView: FragmentAddAmountBinding? = null
     private val addFundView get() = _addFundView!!
-    private val viewModel by viewModel<AddFundsViewModel>()
+    private val viewModel by viewModel<AddAmountViewModel>()
     private val portfolioViewModel by sharedViewModel<PortfolioViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,21 +34,21 @@ class AddFundsFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _addFundView = FragmentAddFundsBinding.inflate(inflater, container, false)
+        _addFundView = FragmentAddAmountBinding.inflate(inflater, container, false)
         setListeners()
         setObservers()
         return addFundView.root
     }
 
     private fun setObservers() {
-        viewModel.addFundsResult.observe(viewLifecycleOwner) { result ->
+        viewModel.addAmountResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is AddFundsResult.Success -> {
+                is AddAmountResult.Success -> {
                     updatePortfolio(BuildConfig.BITCOIN_HOLD_API_KEY)
                     goToPortfolio()
                 }
                 else -> {
-                    showMessage(this.getString(R.string.add_funds_error_to_add))
+                    showMessage(this.getString(R.string.add_amount_error_to_add))
                 }
             }
         }
@@ -64,26 +64,26 @@ class AddFundsFragment : BottomSheetDialogFragment() {
 
     private fun setListeners() {
         with(addFundView) {
-            btnAddFunds.setOnClickListener {
-                val bitcoinAmount = txtBitcoinAmount.text.toString()
-                val price = txtPrice.text.toString()
-                if (viewModel.isValidForm(bitcoinAmount, price)) {
-                    addFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
+            btnAddAmount.setOnClickListener {
+                val amount = txtAmount.text.toString()
+                val paidValue = txtPaidValue.text.toString()
+                if (viewModel.isValidForm(amount, paidValue)) {
+                    addAmount(BuildConfig.BITCOIN_HOLD_API_KEY)
                 }else{
-                    showMessage(this@AddFundsFragment.getString(R.string.add_funds_invalid_form))
+                    showMessage(this@AddAmountFragment.getString(R.string.add_amount_invalid_form))
                 }
             }
         }
     }
 
-    private fun addFunds(apiKey: String) {
+    private fun addAmount(apiKey: String) {
         with(addFundView) {
             userId?.let { userId ->
-                viewModel.removeFunds(
+                viewModel.addAmount(
                     apiKey,
                     userId,
-                    txtBitcoinAmount.text.toString(),
-                    txtPrice.text.toString()
+                    txtAmount.text.toString(),
+                    txtPaidValue.text.toString()
                 )
             }
         }
@@ -92,6 +92,7 @@ class AddFundsFragment : BottomSheetDialogFragment() {
     private fun updatePortfolio(apiKey: String) {
         userId?.let { userId ->
             portfolioViewModel.getPortfolio(apiKey, userId)
+            portfolioViewModel.getAnalysis(apiKey, userId)
         }
     }
 

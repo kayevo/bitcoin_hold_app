@@ -8,19 +8,18 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
-import com.kayevo.bitcoinhold.databinding.FragmentRemoveFundsBinding
-import com.kayevo.bitcoinhold.ui.result.AddFundsResult
-import com.kayevo.bitcoinhold.ui.result.RemoveFundsResult
+import com.kayevo.bitcoinhold.databinding.FragmentRemoveAmountBinding
+import com.kayevo.bitcoinhold.ui.result.RemoveAmountResult
 import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
-import com.kayevo.bitcoinhold.ui.viewmodel.RemoveFundsViewModel
+import com.kayevo.bitcoinhold.ui.viewmodel.RemoveAmountViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RemoveFundsFragment : BottomSheetDialogFragment() {
+class RemoveAmountFragment : BottomSheetDialogFragment() {
     private var userId: String? = null
-    private var _removeFundsView: FragmentRemoveFundsBinding? = null
-    private val removeFundsView get() = _removeFundsView!!
-    private val viewModel by viewModel<RemoveFundsViewModel>()
+    private var _removeAmountView: FragmentRemoveAmountBinding? = null
+    private val removeAmountView get() = _removeAmountView!!
+    private val viewModel by viewModel<RemoveAmountViewModel>()
     private val portfolioViewModel by sharedViewModel<PortfolioViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,26 +34,26 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _removeFundsView = FragmentRemoveFundsBinding.inflate(
+        _removeAmountView = FragmentRemoveAmountBinding.inflate(
             inflater, container, false
         )
         setListeners()
         setObservers()
-        return removeFundsView.root
+        return removeAmountView.root
     }
 
     private fun setObservers() {
-        viewModel.removeFundsResult.observe(viewLifecycleOwner) { result ->
+        viewModel.removeAmountResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is RemoveFundsResult.Success -> {
+                is RemoveAmountResult.Success -> {
                     updatePortfolio(BuildConfig.BITCOIN_HOLD_API_KEY)
                     goToPortfolio()
                 }
-                is RemoveFundsResult.InsufficientFunds -> {
-                    showMessage(this.getString(R.string.remove_funds_insufficient_funds))
+                is RemoveAmountResult.InsufficientAmount -> {
+                    showMessage(this.getString(R.string.remove_amount_insufficient_amount))
                 }
                 else -> {
-                    showMessage(this.getString(R.string.remove_funds_error_to_remove))
+                    showMessage(this.getString(R.string.remove_amount_error_to_remove))
                 }
             }
         }
@@ -69,27 +68,27 @@ class RemoveFundsFragment : BottomSheetDialogFragment() {
     }
 
     private fun setListeners() {
-        with(removeFundsView) {
-            btnRemoveFunds.setOnClickListener {
-                val bitcoinAmount = txtBitcoinAmount.text.toString()
+        with(removeAmountView) {
+            btnRemoveAmount.setOnClickListener {
+                val bitcoinAmount = txtAmount.text.toString()
                 if (viewModel.isValidForm(bitcoinAmount)) {
-                    removeFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
+                    removeAmount(BuildConfig.BITCOIN_HOLD_API_KEY)
                 }else{
                     showMessage(
-                        this@RemoveFundsFragment.getString(R.string.remove_funds_invalid_form)
+                        this@RemoveAmountFragment.getString(R.string.remove_amount_invalid_form)
                     )
                 }
             }
         }
     }
 
-    private fun removeFunds(apiKey: String) {
-        with(removeFundsView) {
+    private fun removeAmount(apiKey: String) {
+        with(removeAmountView) {
             userId?.let { userId ->
-                viewModel.removeFunds(
+                viewModel.removeAmount(
                     apiKey = apiKey,
                     userId,
-                    txtBitcoinAmount.text.toString()
+                    txtAmount.text.toString(),
                 )
             }
         }

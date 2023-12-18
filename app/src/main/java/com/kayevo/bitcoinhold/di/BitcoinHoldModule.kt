@@ -3,7 +3,7 @@ package com.kayevo.bitcoinhold.di
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.repository.*
 import com.kayevo.bitcoinhold.data.service.AdsService
-import com.kayevo.bitcoinhold.data.service.BitcoinPriceService
+import com.kayevo.bitcoinhold.data.service.AnalysisService
 import com.kayevo.bitcoinhold.data.service.PortfolioService
 import com.kayevo.bitcoinhold.data.service.UserService
 import com.kayevo.bitcoinhold.ui.viewmodel.*
@@ -41,8 +41,8 @@ val serviceModule = module {
     single<PortfolioService> {
         get<Retrofit>().create(PortfolioService::class.java) as PortfolioService
     }
-    single<BitcoinPriceService> {
-        get<Retrofit>().create(BitcoinPriceService::class.java) as BitcoinPriceService
+    single<AnalysisService> {
+        get<Retrofit>().create(AnalysisService::class.java) as AnalysisService
     }
     single<AdsService> {
         get<Retrofit>().create(AdsService::class.java) as AdsService
@@ -59,17 +59,8 @@ val repositoryModule = module {
     single<PortfolioRepository> {
         PortfolioRepositoryImp(get<PortfolioService>()) as PortfolioRepository
     }
-    single<AddFundsRepository> {
-        AddFundsRepositoryImp(get<PortfolioService>()) as AddFundsRepository
-    }
-    single<RemoveFundsRepository> {
-        RemoveFundsRepositoryImp(get<PortfolioService>()) as RemoveFundsRepository
-    }
-    single<BitcoinPriceRepository> {
-        BitcoinPriceRepositoryImp(get<BitcoinPriceService>()) as BitcoinPriceRepository
-    }
-    single<CustomizeFundsRepository> {
-        CustomizeFundsRepositoryImp(get<PortfolioService>()) as CustomizeFundsRepository
+    single<AnalysisRepository> {
+        AnalysisRepositoryImp(get<AnalysisService>()) as AnalysisRepository
     }
     single<AdsRepository> {
         AdsRepositoryImp(get<AdsService>()) as AdsRepository
@@ -86,17 +77,17 @@ val viewModelModule = module {
     viewModel<PortfolioViewModel> {
         PortfolioViewModel(
             get<PortfolioRepository>(),
-            get<BitcoinPriceRepository>()
+            get<AnalysisRepository>()
         ) as PortfolioViewModel
     }
-    viewModel<AddFundsViewModel> {
-        AddFundsViewModel(get<AddFundsRepository>()) as AddFundsViewModel
+    viewModel<AddAmountViewModel> {
+        AddAmountViewModel(get<PortfolioRepository>()) as AddAmountViewModel
     }
-    viewModel<RemoveFundsViewModel> {
-        RemoveFundsViewModel(get<RemoveFundsRepository>()) as RemoveFundsViewModel
+    viewModel<RemoveAmountViewModel> {
+        RemoveAmountViewModel(get<PortfolioRepository>()) as RemoveAmountViewModel
     }
-    viewModel<CustomizeFundsViewModel> {
-        CustomizeFundsViewModel(get<CustomizeFundsRepository>()) as CustomizeFundsViewModel
+    viewModel<CustomizeAmountViewModel> {
+        CustomizeAmountViewModel(get<PortfolioRepository>()) as CustomizeAmountViewModel
     }
     viewModel<AdsViewModel> {
         AdsViewModel(get<AdsRepository>()) as AdsViewModel

@@ -1,10 +1,7 @@
 package com.kayevo.bitcoinhold.data.repository
 
-import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.helper.HttpStatusCodeHelper
-import com.kayevo.bitcoinhold.data.result.AddFundsRepoResult
 import com.kayevo.bitcoinhold.data.result.AdsRepoResult
-import com.kayevo.bitcoinhold.data.result.BitcoinPriceRepoResult
 import com.kayevo.bitcoinhold.data.service.AdsService
 
 class AdsRepositoryImp(

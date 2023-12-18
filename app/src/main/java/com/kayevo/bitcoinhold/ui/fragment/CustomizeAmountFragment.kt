@@ -9,17 +9,17 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
-import com.kayevo.bitcoinhold.databinding.FragmentCustomizeFundsBinding
+import com.kayevo.bitcoinhold.databinding.FragmentCustomizeAmountBinding
 import com.kayevo.bitcoinhold.ui.activity.PortfolioActivity
-import com.kayevo.bitcoinhold.ui.result.CustomizeFundsResult
-import com.kayevo.bitcoinhold.ui.viewmodel.CustomizeFundsViewModel
+import com.kayevo.bitcoinhold.ui.result.CustomizeAmountResult
+import com.kayevo.bitcoinhold.ui.viewmodel.CustomizeAmountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CustomizeFundsFragment : BottomSheetDialogFragment() {
+class CustomizeAmountFragment : BottomSheetDialogFragment() {
     private var userId: String? = null
-    private var _customizeFundsView: FragmentCustomizeFundsBinding? = null
-    private val customizeFundsView get() = _customizeFundsView!!
-    private val viewModel by viewModel<CustomizeFundsViewModel>()
+    private var _customizeAmountView: FragmentCustomizeAmountBinding? = null
+    private val customizeAmountView get() = _customizeAmountView!!
+    private val viewModel by viewModel<CustomizeAmountViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,25 +32,24 @@ class CustomizeFundsFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        _customizeFundsView = FragmentCustomizeFundsBinding.inflate(
+        _customizeAmountView = FragmentCustomizeAmountBinding.inflate(
             inflater, container, false
         )
         setListeners()
         setObservers()
-        return customizeFundsView.root
+        return customizeAmountView.root
     }
 
     private fun setListeners() {
-        with(customizeFundsView) {
-            btnCustomizeFunds.setOnClickListener {
-                val bitcoinAmount = txtBitcoinAmount.text.toString()
-                val price = txtPrice.text.toString()
-                if (viewModel.isValidForm(bitcoinAmount, price)) {
-                    customizeFunds(BuildConfig.BITCOIN_HOLD_API_KEY)
+        with(customizeAmountView) {
+            btnCustomizeAmount.setOnClickListener {
+                val amount = txtAmount.text.toString()
+                val paidValue = txtPaidValue.text.toString()
+                if (viewModel.isValidForm(amount, paidValue)) {
+                    customizeAmount(BuildConfig.BITCOIN_HOLD_API_KEY)
                 } else {
                     showMessage(
-                        this@CustomizeFundsFragment.getString(R.string.customize_funds_invalid_form)
+                        this@CustomizeAmountFragment.getString(R.string.customize_amount_invalid_form)
                     )
                 }
             }
@@ -58,13 +57,13 @@ class CustomizeFundsFragment : BottomSheetDialogFragment() {
     }
 
     private fun setObservers() {
-        viewModel.customizeFundsResult.observe(viewLifecycleOwner) { result ->
+        viewModel.customizeAmountResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is CustomizeFundsResult.Success -> {
+                is CustomizeAmountResult.Success -> {
                     goToPortfolio()
                 }
                 else -> {
-                    showMessage(this.getString(R.string.customize_funds_error_to_customize))
+                    showMessage(this.getString(R.string.customize_amount_error_to_customize))
                 }
             }
         }
@@ -82,14 +81,14 @@ class CustomizeFundsFragment : BottomSheetDialogFragment() {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun customizeFunds(apiKey: String) {
-        with(customizeFundsView) {
+    private fun customizeAmount(apiKey: String) {
+        with(customizeAmountView) {
             userId?.let { userId ->
-                viewModel.customizeFunds(
+                viewModel.customizeAmount(
                     apiKey = apiKey,
                     userId,
-                    txtBitcoinAmount.text.toString(),
-                    txtPrice.text.toString()
+                    txtAmount.text.toString(),
+                    txtPaidValue.text.toString()
                 )
             }
         }

@@ -4,26 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
-import com.kayevo.bitcoinhold.data.repository.BitcoinPriceRepository
+import com.kayevo.bitcoinhold.data.repository.AnalysisRepository
 import com.kayevo.bitcoinhold.data.repository.PortfolioRepository
-import com.kayevo.bitcoinhold.data.result.BitcoinPriceRepoResult
+import com.kayevo.bitcoinhold.data.result.AnalysisRepoResult
 import com.kayevo.bitcoinhold.data.result.PortfolioRepoResult
-import com.kayevo.bitcoinhold.model.Portfolio
-import com.kayevo.bitcoinhold.model.PortfolioAnalysis
-import com.kayevo.bitcoinhold.ui.result.PortfolioAnalysisResult
+import com.kayevo.bitcoinhold.ui.result.AnalysisResult
 import com.kayevo.bitcoinhold.ui.result.PortfolioResult
 import kotlinx.coroutines.launch
 
 class PortfolioViewModel(
     private val portfolioRepository: PortfolioRepository,
-    private val bitcoinPriceRepository: BitcoinPriceRepository
+    private val analysisRepository: AnalysisRepository
 ) : ViewModel() {
     private val _portfolioResult = MutableLiveData<PortfolioResult>()
     val portfolioResult: LiveData<PortfolioResult> get() = _portfolioResult
 
-    private val _portfolioAnalysisResult = MutableLiveData<PortfolioAnalysisResult>()
-    val portfolioAnalysisResult: LiveData<PortfolioAnalysisResult> get() = _portfolioAnalysisResult
+    private val _analysisResult = MutableLiveData<AnalysisResult>()
+    val analysisResult: LiveData<AnalysisResult> get() = _analysisResult
 
     fun getPortfolio(apiKey: String, userId: String) {
         viewModelScope.launch {
@@ -31,9 +28,10 @@ class PortfolioViewModel(
                 portfolioRepository.getPortfolio(apiKey = apiKey, userId)) {
                 is PortfolioRepoResult.Success -> {
                     _portfolioResult.postValue(
-                        PortfolioResult.Success(Portfolio(portfolioResponse.portfolio))
+                        PortfolioResult.Success(portfolioResponse.portfolio)
                     )
                 }
+
                 else -> {
                     _portfolioResult.postValue(PortfolioResult.ErrorServer)
                 }
@@ -41,21 +39,16 @@ class PortfolioViewModel(
         }
     }
 
-    fun getPortfolioAnalysis(apiKey: String, portfolio: Portfolio) {
+    fun getAnalysis(apiKey: String, userId: String) {
         viewModelScope.launch {
-            when (val bitcoinPriceResponse = bitcoinPriceRepository.getBitcoinPrice(apiKey)) {
-                is BitcoinPriceRepoResult.Success -> {
-                    val portfolioEntity = PortfolioEntity(portfolio)
-                    val portfolioAnalysis = PortfolioAnalysis(
-                        bitcoinPriceResponse.bitcoinPriceEntity.priceInBRL,
-                        portfolioEntity
-                    )
-                    _portfolioAnalysisResult.postValue(
-                        PortfolioAnalysisResult.Success(portfolioAnalysis)
+            when (val bitcoinPriceResponse = analysisRepository.getAnalysis(apiKey, userId)) {
+                is AnalysisRepoResult.Success -> {
+                    _analysisResult.postValue(
+                        AnalysisResult.Success(bitcoinPriceResponse.analysisEntity)
                     )
                 }
                 else -> {
-                    _portfolioAnalysisResult.postValue(PortfolioAnalysisResult.ErrorServer)
+                    _analysisResult.postValue(AnalysisResult.ErrorServer)
                 }
             }
         }

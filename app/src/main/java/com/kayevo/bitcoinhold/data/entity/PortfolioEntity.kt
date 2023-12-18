@@ -3,17 +3,22 @@ package com.kayevo.bitcoinhold.data.entity
 import com.google.gson.annotations.SerializedName
 import com.kayevo.bitcoinhold.helper.parseBitcoinToSatoshi
 import com.kayevo.bitcoinhold.helper.parseCurrencyToDouble
-import com.kayevo.bitcoinhold.model.Portfolio
 
 data class PortfolioEntity(
-    @SerializedName("satoshiAmount")
-    val satoshiAmount: Long,
+    @SerializedName("amount")
+    val amount: Long,
 
-    @SerializedName("bitcoinAveragePrice")
-    val bitcoinAveragePrice: Double,
+    @SerializedName("averagePrice")
+    val averagePrice: Double,
+
+    @SerializedName("totalPaidValue")
+    val totalPaidValue: Double,
 ){
+    /*
     constructor(portfolio: Portfolio): this(
-        satoshiAmount = portfolio.bitcoinAmount.parseBitcoinToSatoshi(),
-        bitcoinAveragePrice = portfolio.bitcoinAveragePrice.parseCurrencyToDouble()
+        amount = portfolio.amount.parseBitcoinToSatoshi(),
+        averagePrice = portfolio.averagePrice.parseCurrencyToDouble(),
+        totalPaidValue = portfolio.totalPaidValue.parseCurrencyToDouble()
     )
+    */
 }

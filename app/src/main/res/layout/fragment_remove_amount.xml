@@ -4,102 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.AddFundsFragment"
+    tools:context=".ui.fragment.RemoveAmountFragment"
     android:background="@color/primary_dark_blue"
     android:padding="20dp"
     >
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCustomizeFunds"
+        android:id="@+id/btnRemoveAmount"
         style="@style/ContainedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="80dp"
-        android:text="Customizar"
+        android:text="Remover"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/inputAmount" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/txtTitleAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="Quantidade de bitcoins:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Preço pago:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputBitcoinAmount" />
-
-    <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif"
-        android:text="Customizar fundos"
+        android:text="Remover bitcoins"
         android:textColor="@color/gray"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputBitcoinAmount"
+        android:id="@+id/inputAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="60dp"
         android:hint="Inserir bitcoins"
-        tools:helperText="Enter in text format only"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleAmount"
+        tools:helperText="Enter in text format only">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtBitcoinAmount"
+            android:id="@+id/txtAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
-        android:hint="Inserir preço"
-        tools:helperText="Enter in text format only"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

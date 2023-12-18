@@ -1,8 +1,10 @@
 package com.kayevo.bitcoinhold.data.repository
 
-import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.data.helper.HttpStatusCodeHelper
+import com.kayevo.bitcoinhold.data.result.AddAmountRepoResult
+import com.kayevo.bitcoinhold.data.result.CustomizeAmountRepoResult
 import com.kayevo.bitcoinhold.data.result.PortfolioRepoResult
+import com.kayevo.bitcoinhold.data.result.RemoveAmountRepoResult
 import com.kayevo.bitcoinhold.data.service.PortfolioService
 
 class PortfolioRepositoryImp(
@@ -36,6 +38,93 @@ class PortfolioRepositoryImp(
             }
         } catch (e: Exception) {
             PortfolioRepoResult.ErrorServer
+        }
+    }
+
+    override suspend fun removeAmount(
+        apiKey: String,
+        userId: String,
+        amount: Long
+    ): RemoveAmountRepoResult {
+        return try {
+            val removeAmountResponse = portfolioService.removeAmount(
+                apiKey = apiKey, userId, amount
+            )
+
+            when (val responseCode = removeAmountResponse.code()) {
+                HttpStatusCodeHelper.OK.code -> {
+                    RemoveAmountRepoResult.Success
+                }
+                HttpStatusCodeHelper.InternalServerError.code -> {
+                    RemoveAmountRepoResult.ErrorServer
+                }
+                HttpStatusCodeHelper.Unauthorized.code -> {
+                    RemoveAmountRepoResult.InsufficientAmount
+                }
+                else -> {
+                    RemoveAmountRepoResult.Error(responseCode)
+                }
+            }
+        } catch (e: Exception) {
+            RemoveAmountRepoResult.ErrorServer
+        }
+    }
+
+    override suspend fun addAmount(
+        apiKey: String,
+        userId: String,
+        amount: Long,
+        paidValue: Double
+    ): AddAmountRepoResult {
+        return try {
+            val addAmountResponse = portfolioService.addAmount(
+                apiKey,
+                userId,
+                amount,
+                paidValue
+            )
+            when (val responseCode = addAmountResponse.code()) {
+                HttpStatusCodeHelper.OK.code -> {
+                    AddAmountRepoResult.Success
+                }
+                HttpStatusCodeHelper.InternalServerError.code -> {
+                    AddAmountRepoResult.ErrorServer
+                }
+                else -> {
+                    AddAmountRepoResult.Error(responseCode)
+                }
+            }
+        } catch (e: Exception) {
+            AddAmountRepoResult.ErrorServer
+        }
+    }
+
+    override suspend fun setPortfolio(
+        apiKey: String,
+        userId: String,
+        amount: Long,
+        paidValue: Double
+    ): CustomizeAmountRepoResult {
+        return try {
+            val customizeAmountResponse = portfolioService.setPortfolio(
+                apiKey = apiKey,
+                userId,
+                amount,
+                paidValue
+            )
+            when (val responseCode = customizeAmountResponse.code()) {
+                HttpStatusCodeHelper.OK.code -> {
+                    CustomizeAmountRepoResult.Success
+                }
+                HttpStatusCodeHelper.InternalServerError.code -> {
+                    CustomizeAmountRepoResult.ErrorServer
+                }
+                else -> {
+                    CustomizeAmountRepoResult.Error(responseCode)
+                }
+            }
+        } catch (e: Exception) {
+            CustomizeAmountRepoResult.ErrorServer
         }
     }
 }

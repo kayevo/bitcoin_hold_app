@@ -16,18 +16,18 @@
     <string name="portfolio_error_get_portfolio">Erro ao carregar portfólio</string>
     <string name="portfolio_error_get_portfolio_analysis">Erro ao carregar análises do portfólio</string>
 
-    <!-- Add funds -->
-    <string name="add_funds_error_to_add">Erro ao adicionar fundos</string>
-    <string name="add_funds_invalid_form">Valores inválidos</string>
+    <!-- Add amount -->
+    <string name="add_amount_error_to_add">Erro ao adicionar fundos</string>
+    <string name="add_amount_invalid_form">Valores inválidos</string>
 
-    <!-- Remove funds -->
-    <string name="remove_funds_error_to_remove">Erro ao remover fundos</string>
-    <string name="remove_funds_insufficient_funds">Saldo insuficiente</string>
-    <string name="remove_funds_invalid_form">Valores inválidos</string>
+    <!-- Remove amount -->
+    <string name="remove_amount_error_to_remove">Erro ao remover fundos</string>
+    <string name="remove_amount_insufficient_amount">Saldo insuficiente</string>
+    <string name="remove_amount_invalid_form">Valores inválidos</string>
 
-    <!-- Customize funds -->
-    <string name="customize_funds_error_to_customize">Erro ao customizar valores do portfólio</string>
-    <string name="customize_funds_invalid_form">Valores inválidos</string>
+    <!-- Customize amount -->
+    <string name="customize_amount_error_to_customize">Erro ao customizar valores do portfólio</string>
+    <string name="customize_amount_invalid_form">Valores inválidos</string>
 
     <!-- Ads -->
     <string name="ads_error_get_ads">Erro ao carregar anúncio</string>

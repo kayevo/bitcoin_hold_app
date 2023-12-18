@@ -13,18 +13,23 @@
         android:id="@+id/portfolio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtTitlePortfolio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
             android:text="Portfólio"
             android:textColor="@color/green"
             android:textSize="24sp"
@@ -34,142 +39,274 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
+            app:layout_constraintVertical_bias="0.19999999" />
+
+
+        <LinearLayout
+            android:id="@+id/layoutAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitlePortfolio"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitleAmount"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Bitcoins:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="153dp" />
+
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="990.00040000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleAmount"
+                tools:layout_editor_absoluteY="153dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTotalPaidValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutAmount"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitlePaidValue"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Total pago:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.27"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="190dp" />
+
+            <TextView
+                android:id="@+id/txtPaidValue"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="R$ 100"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.73"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="190dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutAveragePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/layoutTotalPaidValue"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitleAveragePrice"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Preço médio:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtAveragePrice"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="228dp" />
+
+            <TextView
+                android:id="@+id/txtAveragePrice"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:gravity="right"
+                android:text="R$ 100"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleAveragePrice"
+                tools:layout_editor_absoluteY="228dp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtTitleAnalysis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="36dp"
-            android:text="Bitcoins:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="76dp"
-            android:text="Preço médio:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/txtBitcoinAmount"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="36dp"
-            android:text="0.00040000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/txtAveragePrice"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="76dp"
-            android:text="R$ 100"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <TextView
-            android:id="@+id/txtBitcoinAmountValue"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="24dp"
-            android:text="R$ 100"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/txtBitcoinPrice"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="68dp"
-            android:text="R$ 100000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/txtProfitPercentage"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="112dp"
-            android:text="+ 10 %"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="24dp"
-            android:text="Valor do portfólio:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="68dp"
-            android:text="Preço do bitcoin:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="112dp"
-            android:text="Lucros:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="156dp"
+            android:layout_marginTop="32dp"
             android:text="Análises"
             android:textColor="@color/green"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutAveragePrice" />
+
+        <LinearLayout
+            android:id="@+id/layoutPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitleAnalysis"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitleBitcoinPrice"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Preço do bitcoin:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtBitcoinPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="353dp" />
+
+            <TextView
+                android:id="@+id/txtBitcoinPrice"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:gravity="right"
+                android:text="R$ 100000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleBitcoinPrice"
+                tools:layout_editor_absoluteY="353dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutAmountValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPrice"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitleTotalAmountValue"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Valor do portfólio:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtTotalAmountValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="417dp" />
+
+            <TextView
+                android:id="@+id/txtTotalAmountValue"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:gravity="right"
+                android:text="R$ 100"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleTotalAmountValue"
+                tools:layout_editor_absoluteY="417dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutProfits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAmountValue"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/txtTitleProfits"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Lucros:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtProfits"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="481dp" />
+
+            <TextView
+                android:id="@+id/txtProfits"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:gravity="right"
+                android:text="+ 10 %"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleProfits"
+                tools:layout_editor_absoluteY="481dp" />
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <include
             android:id="@+id/menu"
             layout="@layout/item_menu"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,7 +1,7 @@
 package com.kayevo.bitcoinhold.data.result
 
-sealed class AddFundsRepoResult{
-    object Success: AddFundsRepoResult()
-    class Error(val code: Int): AddFundsRepoResult()
-    object ErrorServer: AddFundsRepoResult()
+sealed class AddAmountRepoResult{
+    object Success: AddAmountRepoResult()
+    class Error(val code: Int): AddAmountRepoResult()
+    object ErrorServer: AddAmountRepoResult()
 }

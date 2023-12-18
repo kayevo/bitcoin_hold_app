@@ -39,6 +39,9 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 }
             }
+            btnTurnBack.setOnClickListener {
+                finish()
+            }
         }
     }
 

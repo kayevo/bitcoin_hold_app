@@ -14,26 +14,26 @@ interface PortfolioService {
         @Query("userId") userId: String
     ): Response<PortfolioEntity>
 
-    @POST("portfolio/add")
-    suspend fun addFunds(
+    @POST("portfolio/customize")
+    suspend fun setPortfolio(
         @Header("api_key") apiKey: String,
         @Query("userId") userId: String,
-        @Query("satoshiAmount") satoshiAmount: Long,
-        @Query("bitcoinAveragePrice") bitcoinAveragePrice: Double
+        @Query("amount") amount: Long,
+        @Query("totalPaidValue") totalPaidValue: Double
     ): Response<Any>
 
-    @POST("portfolio/customize")
-    suspend fun customizeFunds(
+    @POST("portfolio/add")
+    suspend fun addAmount(
         @Header("api_key") apiKey: String,
         @Query("userId") userId: String,
-        @Query("satoshiAmount") satoshiAmount: Long,
-        @Query("bitcoinAveragePrice") bitcoinAveragePrice: Double
+        @Query("amount") amount: Long,
+        @Query("paidValue") paidValue: Double
     ): Response<Any>
 
     @POST("portfolio/remove")
-    suspend fun removeFunds(
+    suspend fun removeAmount(
         @Header("api_key") apiKey: String,
         @Query("userId") userId: String,
-        @Query("satoshiAmount") satoshiAmount: Long
+        @Query("amount") amount: Long,
     ): Response<Any>
 }

@@ -4,14 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kayevo.bitcoinhold.databinding.ActivitySettingsBinding
-import com.kayevo.bitcoinhold.ui.fragment.CustomizeFundsFragment
-import com.kayevo.bitcoinhold.ui.viewmodel.PortfolioViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.kayevo.bitcoinhold.ui.fragment.CustomizeAmountFragment
 
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var settingsView: ActivitySettingsBinding
-    private var customizeFundsModal: CustomizeFundsFragment? = null
+    private var customizeAmountModal: CustomizeAmountFragment? = null
 
     companion object {
         const val KEY_USER_ID = "USER_ID"
@@ -39,8 +37,8 @@ class SettingsActivity : AppCompatActivity() {
             btnTurnBack.setOnClickListener {
                 finish()
             }
-            btnCustomizeFunds.setOnClickListener {
-                goToCustomizeFunds(userId)
+            btnCustomizeAmount.setOnClickListener {
+                goToCustomizeAmount(userId)
             }
             btnSupport.setOnClickListener {
                 goToActivity(SupportActivity::class.java)
@@ -48,14 +46,14 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToCustomizeFunds(userId: String) {
-        customizeFundsModal = CustomizeFundsFragment().apply {
+    private fun goToCustomizeAmount(userId: String) {
+        customizeAmountModal = CustomizeAmountFragment().apply {
             arguments = Bundle().apply {
-                putString(CustomizeFundsFragment.KEY_USER_ID, userId)
+                putString(CustomizeAmountFragment.KEY_USER_ID, userId)
             }
         }
-        customizeFundsModal?.show(
-            supportFragmentManager, CustomizeFundsFragment.TAG_CUSTOMIZE_FUNDS
+        customizeAmountModal?.show(
+            supportFragmentManager, CustomizeAmountFragment.TAG_CUSTOMIZE_FUNDS
         )
     }
 
