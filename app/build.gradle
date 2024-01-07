@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'kotlin-android'
+    id ("com.google.gms.google-services") // Google services Gradle plugin
 }
 
 android {
@@ -48,7 +49,9 @@ android {
     }
     buildFeatures {
         viewBinding true
+        android.buildFeatures.buildConfig true
     }
+    namespace 'com.kayevo.bitcoinhold'
 }
 
 dependencies {
@@ -62,6 +65,7 @@ dependencies {
     def coroutines_version = "1.6.4"
     def glide_version = "4.13.2"
     def okhttp_version = "4.10.0"
+    def firebase_BoM_version = "32.7.0"
 
     // GradleDependency
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -115,4 +119,13 @@ dependencies {
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+
+    // BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:$firebase_BoM_version"))
+
+    // Add the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-analytics")
+
 }

@@ -25,8 +25,12 @@ class BitcoinHoldApplication : Application() {
         }
 
         // Notification channels
-        NotificationHelper.createNotificationChannel(this,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT, false,
-            getString(R.string.app_name), "App notification channel")
+        NotificationHelper.createNotificationChannel(
+            this,
+            NotificationManagerCompat.IMPORTANCE_DEFAULT,
+            false,
+            getString(R.string.app_name),
+            "App notification channel"
+        )
     }
 }
