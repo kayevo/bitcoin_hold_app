@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
-import com.kayevo.bitcoinhold.data.entity.AdsEntity
+import com.kayevo.bitcoinhold.network.response.AdsResponse
 import com.kayevo.bitcoinhold.databinding.ActivityAdsBinding
 import com.kayevo.bitcoinhold.ui.result.AdsResult
 import com.kayevo.bitcoinhold.ui.viewmodel.AdsViewModel
@@ -112,7 +112,7 @@ class AdsActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAds(ads: AdsEntity) {
+    private fun showAds(ads: AdsResponse) {
         with(adsView) {
             adsLoading.visibility = View.GONE
             adsLayout.visibility = View.VISIBLE

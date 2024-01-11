@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.repository.AdsRepository
-import com.kayevo.bitcoinhold.data.result.AdsRepoResult
-import com.kayevo.bitcoinhold.data.result.LoginRepoResult
+import com.kayevo.bitcoinhold.network.repository.AdsRepository
+import com.kayevo.bitcoinhold.network.result.AdsRepoResult
+import com.kayevo.bitcoinhold.network.result.LoginRepoResult
 import com.kayevo.bitcoinhold.ui.result.AdsResult
 import com.kayevo.bitcoinhold.ui.result.LoginResult
 import kotlinx.coroutines.launch

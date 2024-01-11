@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.repository.RegisterRepository
-import com.kayevo.bitcoinhold.data.result.RegisterRepoResult
+import com.kayevo.bitcoinhold.network.repository.RegisterRepository
+import com.kayevo.bitcoinhold.network.result.RegisterRepoResult
 import com.kayevo.bitcoinhold.model.Credential
 import com.kayevo.bitcoinhold.ui.result.RegisterResult
 import com.kayevo.bitcoinhold.ui.result.RegisteredEmailResult

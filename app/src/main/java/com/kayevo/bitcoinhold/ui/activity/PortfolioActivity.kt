@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kayevo.bitcoinhold.BuildConfig
 import com.kayevo.bitcoinhold.R
-import com.kayevo.bitcoinhold.data.entity.AnalysisEntity
-import com.kayevo.bitcoinhold.data.entity.PortfolioEntity
+import com.kayevo.bitcoinhold.network.response.AnalysisResponse
+import com.kayevo.bitcoinhold.network.response.PortfolioResponse
 import com.kayevo.bitcoinhold.databinding.ActivityPortfolioBinding
 import com.kayevo.bitcoinhold.helper.parseSatoshiToBitcoin
 import com.kayevo.bitcoinhold.helper.parseToCurrency
@@ -107,7 +107,7 @@ class PortfolioActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPortfolioAnalysis(analysis: AnalysisEntity) {
+    private fun showPortfolioAnalysis(analysis: AnalysisResponse) {
         with(view) {
             txtBitcoinPrice.text = analysis.bitcoinPriceInBrl.parseToCurrency()
             txtTotalAmountValue.text = analysis.amountValue.parseToCurrency()
@@ -119,7 +119,7 @@ class PortfolioActivity : AppCompatActivity() {
         viewModel.getAnalysis(apiKey, userId)
     }
 
-    private fun showPortfolio(portfolio: PortfolioEntity) {
+    private fun showPortfolio(portfolio: PortfolioResponse) {
         with(view) {
             txtAmount.text = portfolio.amount.parseSatoshiToBitcoin()
             txtAveragePrice.text = portfolio.averagePrice.parseToCurrency()

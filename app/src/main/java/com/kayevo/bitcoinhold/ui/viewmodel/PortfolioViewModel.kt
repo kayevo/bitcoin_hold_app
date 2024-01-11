@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.repository.AnalysisRepository
-import com.kayevo.bitcoinhold.data.repository.PortfolioRepository
-import com.kayevo.bitcoinhold.data.result.AnalysisRepoResult
-import com.kayevo.bitcoinhold.data.result.PortfolioRepoResult
+import com.kayevo.bitcoinhold.network.repository.AnalysisRepository
+import com.kayevo.bitcoinhold.network.repository.PortfolioRepository
+import com.kayevo.bitcoinhold.network.result.AnalysisRepoResult
+import com.kayevo.bitcoinhold.network.result.PortfolioRepoResult
 import com.kayevo.bitcoinhold.ui.result.AnalysisResult
 import com.kayevo.bitcoinhold.ui.result.PortfolioResult
 import kotlinx.coroutines.launch

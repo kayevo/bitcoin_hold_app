@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kayevo.bitcoinhold.data.repository.PortfolioRepository
-import com.kayevo.bitcoinhold.data.result.RemoveAmountRepoResult
+import com.kayevo.bitcoinhold.network.repository.PortfolioRepository
+import com.kayevo.bitcoinhold.network.result.RemoveAmountRepoResult
 import com.kayevo.bitcoinhold.helper.parseBitcoinToSatoshi
 import com.kayevo.bitcoinhold.helper.parseCurrencyToDouble
 import com.kayevo.bitcoinhold.ui.result.RemoveAmountResult

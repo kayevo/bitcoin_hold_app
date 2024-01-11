@@ -1,11 +1,20 @@
 package com.kayevo.bitcoinhold.di
 
 import com.kayevo.bitcoinhold.BuildConfig
-import com.kayevo.bitcoinhold.data.repository.*
-import com.kayevo.bitcoinhold.data.service.AdsService
-import com.kayevo.bitcoinhold.data.service.AnalysisService
-import com.kayevo.bitcoinhold.data.service.PortfolioService
-import com.kayevo.bitcoinhold.data.service.UserService
+import com.kayevo.bitcoinhold.network.service.AdsService
+import com.kayevo.bitcoinhold.network.service.AnalysisService
+import com.kayevo.bitcoinhold.network.service.PortfolioService
+import com.kayevo.bitcoinhold.network.service.UserService
+import com.kayevo.bitcoinhold.network.repository.AdsRepository
+import com.kayevo.bitcoinhold.network.repository.AdsRepositoryImp
+import com.kayevo.bitcoinhold.network.repository.AnalysisRepository
+import com.kayevo.bitcoinhold.network.repository.AnalysisRepositoryImp
+import com.kayevo.bitcoinhold.network.repository.LoginRepository
+import com.kayevo.bitcoinhold.network.repository.LoginRepositoryImp
+import com.kayevo.bitcoinhold.network.repository.PortfolioRepository
+import com.kayevo.bitcoinhold.network.repository.PortfolioRepositoryImp
+import com.kayevo.bitcoinhold.network.repository.RegisterRepository
+import com.kayevo.bitcoinhold.network.repository.RegisterRepositoryImp
 import com.kayevo.bitcoinhold.ui.viewmodel.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,6 +1,6 @@
 package com.kayevo.bitcoinhold.ui.result
 
-import com.kayevo.bitcoinhold.data.result.LoginRepoResult
+import com.kayevo.bitcoinhold.network.result.LoginRepoResult
 
 sealed class RegisteredEmailResult{
     object NotRegisteredEmail: RegisteredEmailResult()
