@@ -5,11 +5,13 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'kotlin-android'
-    id ("com.google.gms.google-services") // Google services Gradle plugin
+    id("com.google.gms.google-services") // Google services Gradle plugin
 }
 
 android {
     compileSdk 33
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
     defaultConfig {
         applicationId "com.kayevo.bitcoinhold"
@@ -17,9 +19,6 @@ android {
         targetSdk 33
         versionCode 5
         versionName "2.0.2"
-
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
         buildConfigField "String", "BITCOIN_HOLD_BASE_URL", "\"${properties.getProperty("BITCOIN_HOLD_BASE_URL")}\""
         buildConfigField "String", "BITCOIN_HOLD_API_KEY", "\"${properties.getProperty("BITCOIN_HOLD_API_KEY")}\""
@@ -34,10 +33,31 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        def keystore_password = properties
+                .getProperty("KEYSTORE_PASSWORD")
+        def key_signature_alias = properties
+                .getProperty("KEY_SIGNATURE_ALIAS")
+
+        release {
+            storeFile file('../app_keystore.keystore') // Path to your keystore file
+            storePassword keystore_password           // Keystore password
+            keyAlias key_signature_alias                         // Key alias
+            keyPassword keystore_password                    // Key password
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        getByName("release") {
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
